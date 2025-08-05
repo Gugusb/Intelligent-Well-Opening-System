@@ -1,0 +1,250 @@
+/* CSS文件 (css/Page1.css) */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Microsoft YaHei", sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #3a4dbf, #37c8c6);
+  min-height: 100vh;
+  color: #fff;
+  padding: 15px; /* 减小整体页面内边距 */
+}
+
+.container {
+  max-width: 1800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 25% 50% 25%; /* 调整列宽比例 */
+  grid-template-rows: auto 1fr;
+  gap: 15px; /* 减小网格间隙 */
+  height: 97vh; /* 减少整体高度 */
+}
+
+/* 头部标题 */
+.header {
+  grid-column: 1 / span 3;
+  text-align: center;
+  padding: 12px 0; /* 减小内边距 */
+  background: rgba(0, 21, 41, 0.6);
+  border-radius: 10px; /* 减小圆角 */
+  border: 1px solid rgba(85, 185, 255, 0.5);
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3); /* 减小阴影 */
+  backdrop-filter: blur(8px); /* 轻微减小模糊度 */
+}
+
+.header h1 {
+  font-size: 2.1rem; /* 减小标题大小 */
+  letter-spacing: 1px; /* 减小字间距 */
+  text-shadow: 0 0 8px rgba(90, 179, 253, 0.8);
+  margin: 0;
+}
+
+/* 左侧面板样式 */
+.panel-left {
+  grid-column: 1;
+  grid-row: 2;
+  display: grid;
+  grid-template-rows: repeat(3, minmax(160px, auto)); /* 减小高度 */
+  gap: 15px; /* 减小间隙 */
+}
+
+/* 中间面板样式 */
+.panel-center {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 右侧面板样式 */
+.panel-right {
+  grid-column: 3;
+  grid-row: 2;
+  display: grid;
+  grid-template-rows: auto 1fr 1fr;
+  gap: 15px; /* 减小间隙 */
+}
+
+/* 监控块通用样式 - 压缩尺寸 */
+.monitor-block {
+  background: rgba(0, 12, 33, 0.6);
+  border-radius: 10px; /* 减小圆角 */
+  border: 1px solid rgba(94, 181, 251, 0.5);
+  padding: 15px; /* 减小内边距 */
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px); /* 轻微减小模糊度 */
+  overflow: hidden;
+}
+
+.monitor-block h2 {
+  text-align: center;
+  margin-bottom: 12px; /* 减小间距 */
+  color: #59b7ff;
+  font-size: 1.25rem; /* 减小字体大小 */
+  text-shadow: 0 0 4px rgba(89, 181, 255, 0.7);
+  padding-bottom: 8px; /* 减小下边距 */
+  border-bottom: 1px solid rgba(103, 187, 255, 0.4);
+}
+
+/* 3D模型占位区域 - 减小高度 */
+.model-placeholder {
+  width: 100%;
+  height: 600px; /* 显著减小高度 */
+  background: rgba(49, 99, 188, 0.6);
+  border-radius: 10px;
+  position: relative;
+  margin-bottom: 12px; /* 减小与下方区域的间距 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid rgba(102, 186, 255, 0.5);
+}
+
+/* 3D模型图片样式 */
+.model-image {
+  max-width: 95%; /* 略微减小尺寸 */
+  max-height: 95%;
+  object-fit: contain;
+  padding: 8px; /* 减小内边距 */
+}
+
+/* 流量监控面板 - 进一步压缩 */
+.flow-monitor {
+  background: rgba(0, 15, 35, 0.7);
+}
+
+.flow-groups {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px; /* 减小间隙 */
+  margin-bottom: 12px; /* 减小底部间距 */
+}
+
+.flow-group {
+  flex: 1;
+  background: rgba(0, 21, 41, 0.5);
+  border-radius: 6px; /* 减小圆角 */
+  padding: 12px; /* 减小内边距 */
+  border: 1px solid rgba(107, 189, 255, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* 减小阴影 */
+}
+
+.flow-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 6px; /* 减小内边距 */
+  border-bottom: 1px solid rgba(90, 180, 255, 0.2);
+  font-size: 1.1rem; /* 减小字体大小 */
+}
+
+.flow-item:last-child {
+  border-bottom: none;
+}
+
+.flow-value {
+  color: #5ab4ff;
+  font-weight: bold;
+  font-size: 1.15rem; /* 减小字体大小 */
+  text-shadow: 0 0 4px rgba(96, 182, 255, 0.7);
+}
+
+/* 按钮区域 - 压缩高度 */
+.flow-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* 减小按钮间距 */
+  padding-top: 8px; /* 减小顶部间距 */
+}
+
+.flow-btn {
+  padding: 10px 25px; /* 减小内边距 */
+  font-size: 1.1rem; /* 减小按钮字体 */
+  background: rgba(70, 165, 255, 0.4);
+  color: white;
+  border: 1px solid #40a9ff;
+  border-radius: 6px; /* 减小圆角 */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* 减小阴影 */
+  margin-top: 5px; /* 减小上边距 */
+}
+
+.flow-btn:hover {
+  background: rgba(24, 144, 255, 0.8);
+  transform: translateY(-2px); /* 减小悬停位移 */
+  box-shadow: 0 3px 15px rgba(64, 169, 255, 0.6); /* 减小阴影 */
+}
+
+/* 状态指示器 */
+.status-indicator {
+  display: inline-block;
+  width: 10px; /* 减小尺寸 */
+  height: 10px; /* 减小尺寸 */
+  border-radius: 50%;
+  margin-right: 6px; /* 减小右边距 */
+}
+
+.running { background-color: #52c41a; box-shadow: 0 0 6px #52c41a; }
+.stopped { background-color: #f5222d; box-shadow: 0 0 6px #f5222d; }
+
+/* 数据项样式 - 压缩高度 */
+.data-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0; /* 减小内边距 */
+  border-bottom: 1px solid rgba(64, 169, 255, 0.2);
+  font-size: 1.0rem; /* 减小字体大小 */
+}
+
+.data-item:last-child {
+  border-bottom: none;
+}
+
+.data-value {
+  color: #40a9ff;
+  font-weight: bold;
+  text-shadow: 0 0 4px rgba(64, 169, 255, 0.7);
+}
+
+.unit {
+  color: #8c8c8c;
+  font-size: 0.85rem; /* 减小单位字体大小 */
+  margin-left: 2px; /* 减小左边距 */
+}
+
+/* 时间显示 - 压缩 */
+.time-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.3rem; /* 减小字体大小 */
+  letter-spacing: 1px; /* 减小字间距 */
+  text-shadow: 0 0 8px rgba(64, 169, 255, 0.8);
+  padding: 8px 0; /* 减小内边距 */
+  margin-bottom: 10px; /* 减小下边距 */
+}
+
+/* 动画效果 */
+@keyframes pulse {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+.pulse {
+  animation: pulse 1.5s infinite;
+}
+
+/* 新增小图标样式 */
+.flow-item::before {
+  content: "▹"; /* 简单的小图标 */
+  margin-right: 6px;
+  color: #52c41a;
+  text-shadow: 0 0 5px #52c41a;
+}

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>运行参数监控设置平台</title>
+  <link rel="stylesheet" href="../css/Page2.css">
+</head>
+<body>
+<div class="tech-overlay"></div>
+<div class="container">
+  <!-- 头部区域 -->
+  <div class="header">
+    <h1 class="page-title">运行参数监控设置平台</h1>
+    <div class="time-display" id="currentTime">2025-07-15 12:50:51</div>
+  </div>
+
+  <!-- 运行参数区域 -->
+  <div class="parameters-section">
+    <h2 class="section-title">运行参数</h2>
+    <div class="parameters-container">
+      <!-- 1#机组 -->
+      <div class="unit-column">
+        <h3 class="unit-header">1#机组运行参数</h3>
+        <div class="parameter-group">
+          <span class="param-name">启动时间:</span>
+          <span class="param-value" id="unit1-start-time">0 时 0 分</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">停止时间:</span>
+          <span class="param-value" id="unit1-stop-time">0 时 0 分</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">启动压力:</span>
+          <span class="param-value" id="unit1-start-pressure-val">0 MPa</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">停止压力:</span>
+          <span class="param-value" id="unit1-stop-pressure-val">0 MPa</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">左阀时间:</span>
+          <span class="param-value" id="unit1-left-valve-val">0 S</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">右阀时间:</span>
+          <span class="param-value" id="unit1-right-valve-val">0 S</span>
+        </div>
+      </div>
+
+      <!-- 2#机组 -->
+      <div class="unit-column">
+        <h3 class="unit-header">2#机组运行参数</h3>
+        <div class="parameter-group">
+          <span class="param-name">启动时间:</span>
+          <span class="param-value" id="unit2-start-time">0 时 0 分</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">停止时间:</span>
+          <span class="param-value" id="unit2-stop-time">0 时 0 分</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">启动压力:</span>
+          <span class="param-value" id="unit2-start-pressure-val">0 MPa</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">停止压力:</span>
+          <span class="param-value" id="unit2-stop-pressure-val">0 MPa</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">左阀时间:</span>
+          <span class="param-value" id="unit2-left-valve-val">0 S</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">右阀时间:</span>
+          <span class="param-value" id="unit2-right-valve-val">0 S</span>
+        </div>
+      </div>
+
+      <!-- 3#机组 -->
+      <div class="unit-column">
+        <h3 class="unit-header">3#机组运行参数</h3>
+        <div class="parameter-group">
+          <span class="param-name">启动时间:</span>
+          <span class="param-value" id="unit3-start-time">0 时 0 分</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">停止时间:</span>
+          <span class="param-value" id="unit3-stop-time">0 时 0 分</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">启动压力:</span>
+          <span class="param-value" id="unit3-start-pressure-val">0 MPa</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">停止压力:</span>
+          <span class="param-value" id="unit3-stop-pressure-val">0 MPa</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">左阀时间:</span>
+          <span class="param-value" id="unit3-left-valve-val">0 S</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">右阀时间:</span>
+          <span class="param-value" id="unit3-right-valve-val">0 S</span>
+        </div>
+      </div>
+
+      <!-- 4#机组 -->
+      <div class="unit-column">
+        <h3 class="unit-header">4#机组运行参数</h3>
+        <div class="parameter-group">
+          <span class="param-name">启动时间:</span>
+          <span class="param-value" id="unit4-start-time">0 时 0 分</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">停止时间:</span>
+          <span class="param-value" id="unit4-stop-time">0 时 0 分</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">启动压力:</span>
+          <span class="param-value" id="unit4-start-pressure-val">0 MPa</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">停止压力:</span>
+          <span class="param-value" id="unit4-stop-pressure-val">0 MPa</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">左阀时间:</span>
+          <span class="param-value" id="unit4-left-valve-val">0 S</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">右阀时间:</span>
+          <span class="param-value" id="unit4-right-valve-val">0 S</span>
+        </div>
+      </div>
+
+      <!-- 5#机组 -->
+      <div class="unit-column">
+        <h3 class="unit-header">5#机组运行参数</h3>
+        <div class="parameter-group">
+          <span class="param-name">启动时间:</span>
+          <span class="param-value" id="unit5-start-time">0 时 0 分</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">停止时间:</span>
+          <span class="param-value" id="unit5-stop-time">0 时 0 分</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">启动压力:</span>
+          <span class="param-value" id="unit5-start-pressure-val">0 MPa</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">停止压力:</span>
+          <span class="param-value" id="unit5-stop-pressure-val">0 MPa</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">左阀时间:</span>
+          <span class="param-value" id="unit5-left-valve-val">0 S</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">右阀时间:</span>
+          <span class="param-value" id="unit5-right-valve-val">0 S</span>
+        </div>
+      </div>
+
+      <!-- 气举面板 -->
+      <div class="unit-column">
+        <h3 class="unit-header">气举1#2#运行参数</h3>
+        <div class="parameter-group">
+          <span class="param-name">1#左阀时间:</span>
+          <span class="param-value" id="gas1-left-valve-val">0 S</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">1#右阀时间:</span>
+          <span class="param-value" id="gas1-right-valve-val">0 S</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">2#左阀时间:</span>
+          <span class="param-value" id="gas2-left-valve-val">0 S</span>
+        </div>
+        <div class="parameter-group">
+          <span class="param-name">2#右阀时间:</span>
+          <span class="param-value" id="gas2-right-valve-val">0 S</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 设置面板区域 -->
+  <div class="settings-section">
+    <div class="settings-header">
+      <h2 class="settings-title">设置按钮</h2>
+    </div>
+
+    <div class="units-container">
+      <!-- 1#机组设置 -->
+      <div class="unit-settings">
+        <h4 class="unit-label">1#机组</h4>
+        <div class="button-group">
+          <button class="setting-button" data-unit="1" data-type="start-hr">启动小时</button>
+          <button class="setting-button" data-unit="1" data-type="start-min">启动分钟</button>
+          <button class="setting-button" data-unit="1" data-type="stop-hr">停止小时</button>
+          <button class="setting-button" data-unit="1" data-type="stop-min">停止分钟</button>
+          <button class="setting-button" data-unit="1" data-type="start-pressure">启动压力</button>
+          <button class="setting-button" data-unit="1" data-type="stop-pressure">停止压力</button>
+          <button class="setting-button" data-unit="1" data-type="left-valve">左阀时间</button>
+          <button class="setting-button" data-unit="1" data-type="right-valve">右阀时间</button>
+        </div>
+      </div>
+
+      <!-- 2#机组设置 -->
+      <div class="unit-settings">
+        <h4 class="unit-label">2#机组</h4>
+        <div class="button-group">
+          <button class="setting-button" data-unit="2" data-type="start-hr">启动小时</button>
+          <button class="setting-button" data-unit="2" data-type="start-min">启动分钟</button>
+          <button class="setting-button" data-unit="2" data-type="stop-hr">停止小时</button>
+          <button class="setting-button" data-unit="2" data-type="stop-min">停止分钟</button>
+          <button class="setting-button" data-unit="2" data-type="start-pressure">启动压力</button>
+          <button class="setting-button" data-unit="2" data-type="stop-pressure">停止压力</button>
+          <button class="setting-button" data-unit="2" data-type="left-valve">左阀时间</button>
+          <button class="setting-button" data-unit="2" data-type="right-valve">右阀时间</button>
+        </div>
+      </div>
+
+      <!-- 3#机组设置 -->
+      <div class="unit-settings">
+        <h4 class="unit-label">3#机组</h4>
+        <div class="button-group">
+          <button class="setting-button" data-unit="3" data-type="start-hr">启动小时</button>
+          <button class="setting-button" data-unit="3" data-type="start-min">启动分钟</button>
+          <button class="setting-button" data-unit="3" data-type="stop-hr">停止小时</button>
+          <button class="setting-button" data-unit="3" data-type="stop-min">停止分钟</button>
+          <button class="setting-button" data-unit="3" data-type="start-pressure">启动压力</button>
+          <button class="setting-button" data-unit="3" data-type="stop-pressure">停止压力</button>
+          <button class="setting-button" data-unit="3" data-type="left-valve">左阀时间</button>
+          <button class="setting-button" data-unit="3" data-type="right-valve">右阀时间</button>
+        </div>
+      </div>
+
+      <!-- 4#机组设置 -->
+      <div class="unit-settings">
+        <h4 class="unit-label">4#机组</h4>
+        <div class="button-group">
+          <button class="setting-button" data-unit="4" data-type="start-hr">启动小时</button>
+          <button class="setting-button" data-unit="4" data-type="start-min">启动分钟</button>
+          <button class="setting-button" data-unit="4" data-type="stop-hr">停止小时</button>
+          <button class="setting-button" data-unit="4" data-type="stop-min">停止分钟</button>
+          <button class="setting-button" data-unit="4" data-type="start-pressure">启动压力</button>
+          <button class="setting-button" data-unit="4" data-type="stop-pressure">停止压力</button>
+          <button class="setting-button" data-unit="4" data-type="left-valve">左阀时间</button>
+          <button class="setting-button" data-unit="4" data-type="right-valve">右阀时间</button>
+        </div>
+      </div>
+
+      <!-- 5#机组设置 -->
+      <div class="unit-settings">
+        <h4 class="unit-label">5#机组</h4>
+        <div class="button-group">
+          <button class="setting-button" data-unit="5" data-type="start-hr">启动小时</button>
+          <button class="setting-button" data-unit="5" data-type="start-min">启动分钟</button>
+          <button class="setting-button" data-unit="5" data-type="stop-hr">停止小时</button>
+          <button class="setting-button" data-unit="5" data-type="stop-min">停止分钟</button>
+          <button class="setting-button" data-unit="5" data-type="start-pressure">启动压力</button>
+          <button class="setting-button" data-unit="5" data-type="stop-pressure">停止压力</button>
+          <button class="setting-button" data-unit="5" data-type="left-valve">左阀时间</button>
+          <button class="setting-button" data-unit="5" data-type="right-valve">右阀时间</button>
+        </div>
+      </div>
+
+      <!-- 气举1#2#设置 -->
+      <div class="gas-lift-container">
+        <div class="gas-unit">
+          <h4 class="unit-label">气举1#2#</h4>
+          <div class="button-group">
+            <button class="setting-button" data-unit="gas1" data-type="left-valve">1#左阀时间</button>
+            <button class="setting-button" data-unit="gas1" data-type="right-valve">1#右阀时间</button>
+            <button class="setting-button" data-unit="gas2" data-type="left-valve">2#左阀时间</button>
+            <button class="setting-button" data-unit="gas2" data-type="right-valve">2#右阀时间</button>
+          </div>
+        </div>
+
+        <!-- 导航按钮 -->
+        <div class="action-buttons">
+          <button class="nav-button">下一页</button>
+          <button class="nav-button">主页面</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/Page2.js"></script>
+</body>
+</html>

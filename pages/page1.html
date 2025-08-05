@@ -1,10 +1,252 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>增压混输气举设备可视化平台</title>
+  <link rel="stylesheet" href="../css/Page1.css">
 </head>
 <body>
+<div class="container">
+  <div class="header">
+    <h1>增压混输气举设备可视化平台</h1>
+  </div>
 
+  <!-- 左侧面板 -->
+  <div class="panel-left">
+    <div class="monitor-block">
+      <h2>设备状态监控</h2>
+      <div class="data-item">
+        <span>当前模式：</span>
+        <span class="data-value" id="currentMode">正常模式</span>
+      </div>
+      <div class="data-item">
+        <span>左电气箱状态：</span>
+        <span>
+                        <span class="status-indicator running" id="leftElecStatus"></span>
+                        <span class="data-value" id="leftElecText">运行正常</span>
+                    </span>
+      </div>
+      <div class="data-item">
+        <span>右电气箱状态：</span>
+        <span>
+                        <span class="status-indicator running" id="rightElecStatus"></span>
+                        <span class="data-value" id="rightElecText">运行正常</span>
+                    </span>
+      </div>
+    </div>
+
+    <div class="monitor-block">
+      <h2>机组状态监控</h2>
+      <div class="data-item">
+        <span>1#负压机组运行状态：</span>
+        <span>
+                        <span class="status-indicator stopped" id="unit1Status"></span>
+                        <span class="data-value" id="unit1StatusText">停止</span>
+                    </span>
+      </div>
+      <div class="data-item">
+        <span>2#负压机组运行状态：</span>
+        <span>
+                        <span class="status-indicator stopped" id="unit2Status"></span>
+                        <span class="data-value" id="unit2StatusText">停止</span>
+                    </span>
+      </div>
+      <div class="data-item">
+        <span>3#负压机组运行状态：</span>
+        <span>
+                        <span class="status-indicator stopped" id="unit3Status"></span>
+                        <span class="data-value" id="unit3StatusText">停止</span>
+                    </span>
+      </div>
+      <div class="data-item">
+        <span>4#负压机组运行状态：</span>
+        <span>
+                        <span class="status-indicator stopped" id="unit4Status"></span>
+                        <span class="data-value" id="unit4StatusText">停止</span>
+                    </span>
+      </div>
+      <div class="data-item">
+        <span>5#气举机组运行状态：</span>
+        <span>
+                        <span class="status-indicator stopped" id="unit5Status"></span>
+                        <span class="data-value" id="unit5StatusText">停止</span>
+                    </span>
+      </div>
+      <div class="data-item">
+        <span>6#气举机组运行状态：</span>
+        <span>
+            <span class="status-indicator stopped" id="unit6Status"></span>
+            <span class="data-value" id="unit6StatusText">停止</span>
+        </span>
+      </div>
+      <div class="data-item">
+        <span>7#泡排机组运行状态：</span>
+        <span>
+            <span class="status-indicator stopped" id="unit7Status"></span>
+            <span class="data-value" id="unit7StatusText">停止</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="monitor-block">
+      <h2>机组启泵次数监控</h2>
+      <div class="data-item">
+        <span>1#启泵次数：</span>
+        <span class="data-value"><span id="pump1Count">0</span><span class="unit">次</span></span>
+      </div>
+      <div class="data-item">
+        <span>2#启泵次数：</span>
+        <span class="data-value"><span id="pump2Count">0</span><span class="unit">次</span></span>
+      </div>
+      <div class="data-item">
+        <span>3#启泵次数：</span>
+        <span class="data-value"><span id="pump3Count">0</span><span class="unit">次</span></span>
+      </div>
+      <div class="data-item">
+        <span>4#启泵次数：</span>
+        <span class="data-value"><span id="pump4Count">0</span><span class="unit">次</span></span>
+      </div>
+      <div class="data-item">
+        <span>5#启泵次数：</span>
+        <span class="data-value"><span id="pump5Count">0</span><span class="unit">次</span></span>
+      </div>
+      <div class="data-item">
+        <span>1#气举启泵次数：</span>
+        <span class="data-value"><span id="gasPump1Count">0</span><span class="unit">次</span></span>
+      </div>
+      <div class="data-item">
+        <span>2#气举启泵次数：</span>
+        <span class="data-value"><span id="gasPump2Count">0</span><span class="unit">次</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 中间面板 -->
+  <div class="panel-center">
+    <div class="monitor-block">
+      <div class="model-placeholder">
+        <img src="../img/equipment_3d_diagram.png" alt="设备3D图" class="model-image">
+      </div>
+    </div>
+
+    <!-- 新增的流量监控面板 -->
+    <div class="flow-monitor monitor-block">
+      <h2>设备流量监控</h2>
+      <div class="flow-groups">
+        <div class="flow-group">
+          <div class="flow-item">
+            <span>1#2#3#总瞬时流量(L/S)：</span>
+            <span class="flow-value">0<span class="unit">L/S</span></span>
+          </div>
+          <div class="flow-item">
+            <span>1#2#3#总累计流量(m³)：</span>
+            <span class="flow-value">0<span class="unit">m³</span></span>
+          </div>
+        </div>
+        <div class="flow-group">
+          <div class="flow-item">
+            <span>4#5#总瞬时流量(L/S)：</span>
+            <span class="flow-value">0<span class="unit">L/S</span></span>
+          </div>
+          <div class="flow-item">
+            <span>4#5#总累计流量(m³)：</span>
+            <span class="flow-value">0<span class="unit">m³</span></span>
+          </div>
+        </div>
+        <div class="flow-group">
+          <div class="flow-item">
+            <span>气举瞬时流量(L/S)：</span>
+            <span class="flow-value">0<span class="unit">L/S</span></span>
+          </div>
+          <div class="flow-item">
+            <span>气举累计流量(m³)：</span>
+            <span class="flow-value">0<span class="unit">m³</span></span>
+          </div>
+        </div>
+      </div>
+      <!-- 页面按钮区域 -->
+      <div class="flow-buttons">
+        <button class="flow-btn">运行参数</button>
+        <button class="flow-btn">加药页面</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右侧面板 -->
+  <div class="panel-right">
+    <div class="monitor-block">
+      <div class="time-display" id="currentTime">2025-07-15 12:50:10</div>
+    </div>
+
+    <div class="monitor-block">
+      <h2>设备压力监控</h2>
+      <div class="data-item">
+        <span>1#前端压力：</span>
+        <span class="data-value"><span id="frontPressure1">0</span><span class="unit">MPa</span></span>
+      </div>
+      <div class="data-item">
+        <span>2#前端压力：</span>
+        <span class="data-value"><span id="frontPressure2">0</span><span class="unit">MPa</span></span>
+      </div>
+      <div class="data-item">
+        <span>3#前端压力：</span>
+        <span class="data-value"><span id="frontPressure3">0</span><span class="unit">MPa</span></span>
+      </div>
+      <div class="data-item">
+        <span>4#5#前端压力：</span>
+        <span class="data-value"><span id="frontPressure45">0</span><span class="unit">MPa</span></span>
+      </div>
+      <div class="data-item">
+        <span>气举5#前端压力：</span>
+        <span class="data-value"><span id="gasFrontPressure5">0</span><span class="unit">MPa</span></span>
+      </div>
+      <div class="data-item">
+        <span>气举6#前端压力：</span>
+        <span class="data-value"><span id="gasFrontPressure6">0</span><span class="unit">MPa</span></span>
+      </div>
+      <div class="data-item">
+        <span>1#2#3#后端压力：</span>
+        <span class="data-value"><span id="rearPressure123">0</span><span class="unit">MPa</span></span>
+      </div>
+      <div class="data-item">
+        <span>4#5#后端压力：</span>
+        <span class="data-value"><span id="rearPressure45">0</span><span class="unit">MPa</span></span>
+      </div>
+      <div class="data-item">
+        <span>气举6#后端压力：</span>
+        <span class="data-value"><span id="gasRearPressure6">0</span><span class="unit">MPa</span></span>
+      </div>
+    </div>
+
+    <div class="monitor-block">
+      <h2>流量计监控</h2>
+      <div class="data-item">
+        <span>瞬时流量：</span>
+        <span class="data-value"><span id="instantFlow">0</span><span class="unit">m³/h</span></span>
+      </div>
+      <div class="data-item">
+        <span>累计流量：</span>
+        <span class="data-value"><span id="totalFlow">0</span><span class="unit">m³</span></span>
+      </div>
+      <div class="data-item">
+        <span>介质温度：</span>
+        <span class="data-value"><span id="mediumTemp">0</span><span class="unit">°C</span></span>
+      </div>
+      <div class="data-item">
+        <span>静压值：</span>
+        <span class="data-value"><span id="staticPressure">0</span><span class="unit">MPa</span></span>
+      </div>
+      <div class="data-item">
+        <span>压差值：</span>
+        <span class="data-value"><span id="pressureDiff">0</span><span class="unit">KPa</span></span>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+<script src="../js/Page1.js"></script>
 </body>
 </html>
