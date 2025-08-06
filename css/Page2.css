@@ -6,41 +6,21 @@
 }
 
 body {
-  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  background: #fff; /* 白色背景 */
   min-height: 100vh;
-  color: #fff;
+  color: #333; /* 深灰色文字 */
   padding: 20px;
   position: relative;
   overflow-x: hidden;
 }
 
-/* 科技感背景装饰 */
+/* 移除科技感背景装饰 */
 body::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
-  background-size: 40px 40px;
-  opacity: 0.15;
-  pointer-events: none;
-  z-index: 0;
+  content: none;
 }
 
 .tech-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.2), transparent 50%),
-  radial-gradient(circle at 80% 80%, rgba(100, 255, 255, 0.15), transparent 50%);
-  pointer-events: none;
-  z-index: 0;
+  content: none;
 }
 
 .container {
@@ -53,57 +33,51 @@ body::before {
   z-index: 1;
 }
 
-/* 头部样式 */
+/* 头部样式 - 顶级标题使用蓝色背景 */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 30px;
-  background: rgba(0, 30, 60, 0.65);
+  background: #1a2980; /* 蓝色背景 */
   border-radius: 15px;
-  border: 1px solid rgba(64, 224, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 60, 120, 0.3);
-  backdrop-filter: blur(12px);
+  border: 1px solid #1a2980;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 更柔和的阴影 */
 }
 
 .page-title {
   font-size: 2.5rem;
   font-weight: bold;
-  text-shadow: 0 0 15px rgba(64, 224, 255, 0.9);
   letter-spacing: 2px;
-  background: linear-gradient(to right, #f8f8f8, #7bb9ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: white; /* 白色文字 */
 }
 
 .time-display {
   font-size: 1.6rem;
-  background: rgba(0, 30, 60, 0.7);
+  background: #1a2980; /* 蓝色背景 */
   padding: 10px 20px;
   border-radius: 10px;
-  border: 1px solid rgba(64, 224, 255, 0.25);
+  border: 1px solid #1a2980;
   font-family: 'Courier New', monospace;
-  text-shadow: 0 0 8px rgba(64, 224, 255, 0.7);
+  color: white; /* 白色文字 */
 }
 
 /* 运行参数区域 */
 .parameters-section {
-  background: rgba(0, 30, 60, 0.65);
+  background: #fff; /* 白色背景 */
   border-radius: 15px;
-  border: 1px solid rgba(64, 224, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 60, 120, 0.3);
+  border: 1px solid #ddd; /* 浅灰色边框 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* 更柔和的阴影 */
   padding: 25px;
-  backdrop-filter: blur(12px);
 }
 
 .section-title {
   font-size: 1.8rem;
-  color: #7bb9ff;
+  color: #333; /* 深灰色文字 */
   margin-bottom: 25px;
   text-align: center;
-  text-shadow: 0 0 10px rgba(64, 224, 255, 0.5);
   padding-bottom: 12px;
-  border-bottom: 1px solid rgba(64, 224, 255, 0.2);
+  border-bottom: 1px solid #ddd; /* 浅灰色边框 */
 }
 
 .parameters-container {
@@ -113,20 +87,20 @@ body::before {
 }
 
 .unit-column {
-  background: rgba(0, 50, 80, 0.7);
+  background: #f8f8f8; /* 浅灰色背景 */
   border-radius: 12px;
-  border: 1px solid rgba(64, 224, 255, 0.25);
+  border: 1px solid #ddd; /* 浅灰色边框 */
   padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .unit-header {
   font-size: 1.5rem;
-  color: #5ab1e8;
+  color: #333; /* 深灰色文字 */
   text-align: center;
   margin-bottom: 18px;
-  text-shadow: 0 0 8px rgba(64, 224, 255, 0.4);
   padding-bottom: 10px;
-  border-bottom: 1px solid rgba(64, 224, 255, 0.2);
+  border-bottom: 1px solid #ddd; /* 浅灰色边框 */
 }
 
 .parameter-group {
@@ -135,33 +109,31 @@ body::before {
   margin-bottom: 15px;
   padding: 10px;
   border-radius: 8px;
-  background: rgba(0, 40, 70, 0.6);
+  background: #f0f0f0; /* 稍深一点的灰色背景 */
 }
 
 .param-name {
-  color: #a3d5ff;
+  color: #444; /* 深灰色文字 */
   font-size: 1.15rem;
   flex: 1;
 }
 
 .param-value {
-  color: #7bb9ff;
+  color: #333; /* 深灰色文字 */
   font-weight: bold;
   font-size: 1.2rem;
   flex: 1;
   text-align: right;
   font-family: 'Courier New', monospace;
-  text-shadow: 0 0 8px rgba(64, 224, 255, 0.5);
 }
 
 /* 设置面板区域 */
 .settings-section {
-  background: rgba(0, 30, 60, 0.65);
+  background: #fff; /* 白色背景 */
   border-radius: 15px;
-  border: 1px solid rgba(64, 224, 255, 0.3);
-  box-shadow: 0 8px 32px rgba(0, 60, 120, 0.3);
+  border: 1px solid #ddd; /* 浅灰色边框 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* 更柔和的阴影 */
   padding: 25px 30px;
-  backdrop-filter: blur(12px);
 }
 
 .settings-header {
@@ -173,8 +145,7 @@ body::before {
 
 .settings-title {
   font-size: 1.8rem;
-  color: #7bb9ff;
-  text-shadow: 0 0 10px rgba(64, 224, 255, 0.5);
+  color: #333; /* 深灰色文字 */
 }
 
 .units-container {
@@ -184,18 +155,17 @@ body::before {
 }
 
 .unit-settings {
-  background: rgba(0, 50, 80, 0.7);
+  background: #f8f8f8; /* 浅灰色背景 */
   border-radius: 12px;
-  border: 1px solid rgba(64, 224, 255, 0.25);
+  border: 1px solid #ddd; /* 浅灰色边框 */
   padding: 18px;
 }
 
 .unit-label {
   font-size: 1.4rem;
-  color: #5ab1e8;
+  color: #333; /* 深灰色文字 */
   text-align: center;
   margin-bottom: 15px;
-  text-shadow: 0 0 8px rgba(64, 224, 255, 0.4);
 }
 
 .input-group {
@@ -213,10 +183,10 @@ body::before {
 .input-field {
   flex: 1;
   padding: 10px 12px;
-  background: rgba(0, 40, 70, 0.6);
-  border: 1px solid rgba(64, 224, 255, 0.3);
+  background: #fff; /* 白色背景 */
+  border: 1px solid #ddd; /* 浅灰色边框 */
   border-radius: 6px;
-  color: #a3d5ff;
+  color: #333; /* 深灰色文字 */
   font-size: 1.1rem;
   font-family: 'Courier New', monospace;
   transition: all 0.3s;
@@ -224,14 +194,14 @@ body::before {
 
 .input-field:focus {
   outline: none;
-  box-shadow: 0 0 8px rgba(64, 224, 255, 0.7);
-  border-color: #40e0ff;
+  box-shadow: 0 0 5px rgb(26, 41, 128); /* 蓝色高亮 */
+  border-color: #1a2980; /* 蓝色边框 */
 }
 
 .time-label {
   text-align: center;
   font-size: 0.9rem;
-  color: #7bb9ff;
+  color: #666; /* 灰色文字 */
   margin-top: 5px;
 }
 
@@ -242,9 +212,9 @@ body::before {
 }
 
 .gas-unit {
-  background: rgba(0, 50, 80, 0.7);
+  background: #f8f8f8; /* 浅灰色背景 */
   border-radius: 12px;
-  border: 1px solid rgba(64, 224, 255, 0.25);
+  border: 1px solid #ddd; /* 浅灰色边框 */
   padding: 18px;
 }
 
@@ -257,30 +227,30 @@ body::before {
 
 .nav-button {
   padding: 14px 22px;
-  background: linear-gradient(to bottom, #3a5fcd, #1a3a8f);
-  color: white;
+  background: #1a2980; /* 蓝色背景 */
+  color: white; /* 白色文字 */
   border: none;
   border-radius: 50px;
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s;
   min-width: 130px;
   text-align: center;
 }
 
 .nav-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(64, 224, 255, 0.4);
-  background: linear-gradient(to bottom, #4a6fdd, #2a4aaf);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  background: #1a2980; /* 深蓝色 */
 }
 
 .nav-button:active {
   transform: translateY(1px);
 }
 
-/* 新增按钮组样式 */
+/* 按钮组样式 */
 .button-group {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -290,31 +260,30 @@ body::before {
 
 .setting-button {
   padding: 10px 5px;
-  background: linear-gradient(to bottom, #2a4a9f, #1a3a8f);
-  color: white;
+  background: #1a2980; /* 蓝色背景 */
+  color: white; /* 白色文字 */
   border: none;
   border-radius: 8px;
   font-size: 0.95rem;
   font-weight: bold;
   cursor: pointer;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s;
   min-height: 40px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .setting-button:hover {
-  background: linear-gradient(to bottom, #3a5aaf, #2a4a9f);
-  box-shadow: 0 5px 15px rgba(64, 224, 255, 0.4);
+  background: #0066CC; /* 深蓝色 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .setting-button:active {
   transform: translateY(2px);
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* 调整单位设置面板高度 */

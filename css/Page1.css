@@ -1,4 +1,4 @@
-/* CSS文件 (css/Page1.css) */
+/* CSS文件 (css/Page1.css) - 白底黑字风格 */
 * {
   margin: 0;
   padding: 0;
@@ -7,38 +7,37 @@
 }
 
 body {
-  background: linear-gradient(135deg, #3a4dbf, #37c8c6);
+  background: #f5f7fa; /* 浅灰色背景 */
   min-height: 100vh;
-  color: #fff;
-  padding: 15px; /* 减小整体页面内边距 */
+  color: #333; /* 深灰色文字 */
+  padding: 15px;
 }
 
 .container {
   max-width: 1800px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 25% 50% 25%; /* 调整列宽比例 */
+  grid-template-columns: 25% 50% 25%;
   grid-template-rows: auto 1fr;
-  gap: 15px; /* 减小网格间隙 */
-  height: 97vh; /* 减少整体高度 */
+  gap: 15px;
+  height: 97vh;
 }
 
-/* 头部标题 */
+/* 头部标题 - 保留蓝色背景 */
 .header {
   grid-column: 1 / span 3;
   text-align: center;
-  padding: 12px 0; /* 减小内边距 */
-  background: rgba(0, 21, 41, 0.6);
-  border-radius: 10px; /* 减小圆角 */
-  border: 1px solid rgba(85, 185, 255, 0.5);
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3); /* 减小阴影 */
-  backdrop-filter: blur(8px); /* 轻微减小模糊度 */
+  padding: 12px 0;
+  background: #1a2980; /* 深蓝色背景 */
+  border-radius: 10px;
+  border: 1px solid #1a2980;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .header h1 {
-  font-size: 2.1rem; /* 减小标题大小 */
-  letter-spacing: 1px; /* 减小字间距 */
-  text-shadow: 0 0 8px rgba(90, 179, 253, 0.8);
+  font-size: 2.1rem;
+  letter-spacing: 1px;
+  color: white; /* 白色文字 */
   margin: 0;
 }
 
@@ -47,8 +46,8 @@ body {
   grid-column: 1;
   grid-row: 2;
   display: grid;
-  grid-template-rows: repeat(3, minmax(160px, auto)); /* 减小高度 */
-  gap: 15px; /* 减小间隙 */
+  grid-template-rows: repeat(3, minmax(160px, auto));
+  gap: 15px;
 }
 
 /* 中间面板样式 */
@@ -66,81 +65,80 @@ body {
   grid-row: 2;
   display: grid;
   grid-template-rows: auto 1fr 1fr;
-  gap: 15px; /* 减小间隙 */
+  gap: 15px;
 }
 
-/* 监控块通用样式 - 压缩尺寸 */
+/* 监控块通用样式 - 白色背景 */
 .monitor-block {
-  background: rgba(0, 12, 33, 0.6);
-  border-radius: 10px; /* 减小圆角 */
-  border: 1px solid rgba(94, 181, 251, 0.5);
-  padding: 15px; /* 减小内边距 */
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px); /* 轻微减小模糊度 */
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #e0e6ed;
+  padding: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   overflow: hidden;
 }
 
 .monitor-block h2 {
   text-align: center;
-  margin-bottom: 12px; /* 减小间距 */
-  color: #59b7ff;
-  font-size: 1.25rem; /* 减小字体大小 */
-  text-shadow: 0 0 4px rgba(89, 181, 255, 0.7);
-  padding-bottom: 8px; /* 减小下边距 */
-  border-bottom: 1px solid rgba(103, 187, 255, 0.4);
+  margin-bottom: 12px;
+  color: #2c3e50; /* 深蓝色标题 */
+  font-size: 1.25rem;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e0e6ed;
 }
 
-/* 3D模型占位区域 - 减小高度 */
+/* 3D模型占位区域 - 浅灰色背景 */
 .model-placeholder {
   width: 100%;
-  height: 600px; /* 显著减小高度 */
-  background: rgba(49, 99, 188, 0.6);
+  height: 600px;
+  background: #f0f4f8;
   border-radius: 10px;
   position: relative;
-  margin-bottom: 12px; /* 减小与下方区域的间距 */
+  margin-bottom: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  border: 1px solid rgba(102, 186, 255, 0.5);
+  border: 1px solid #e0e6ed;
 }
 
 /* 3D模型图片样式 */
 .model-image {
-  max-width: 95%; /* 略微减小尺寸 */
+  max-width: 95%;
   max-height: 95%;
   object-fit: contain;
-  padding: 8px; /* 减小内边距 */
+  padding: 8px;
 }
 
-/* 流量监控面板 - 进一步压缩 */
+/* 流量监控面板 - 白色背景 */
 .flow-monitor {
-  background: rgba(0, 15, 35, 0.7);
+  background: #ffffff;
 }
 
 .flow-groups {
   display: flex;
   justify-content: space-between;
-  gap: 12px; /* 减小间隙 */
-  margin-bottom: 12px; /* 减小底部间距 */
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
 .flow-group {
   flex: 1;
-  background: rgba(0, 21, 41, 0.5);
-  border-radius: 6px; /* 减小圆角 */
-  padding: 12px; /* 减小内边距 */
-  border: 1px solid rgba(107, 189, 255, 0.3);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* 减小阴影 */
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 12px;
+  border: 1px solid #e0e6ed;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
 
 .flow-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 6px; /* 减小内边距 */
-  border-bottom: 1px solid rgba(90, 180, 255, 0.2);
-  font-size: 1.1rem; /* 减小字体大小 */
+  padding: 10px 6px;
+  border-bottom: 1px solid #e0e6ed;
+  font-size: 1.1rem;
+  color: #333;
 }
 
 .flow-item:last-child {
@@ -148,58 +146,58 @@ body {
 }
 
 .flow-value {
-  color: #5ab4ff;
+  color: #2c3e50;
   font-weight: bold;
-  font-size: 1.15rem; /* 减小字体大小 */
-  text-shadow: 0 0 4px rgba(96, 182, 255, 0.7);
+  font-size: 1.15rem;
 }
 
-/* 按钮区域 - 压缩高度 */
+/* 按钮区域 */
 .flow-buttons {
   display: flex;
   justify-content: center;
-  gap: 30px; /* 减小按钮间距 */
-  padding-top: 8px; /* 减小顶部间距 */
+  gap: 30px;
+  padding-top: 8px;
 }
 
 .flow-btn {
-  padding: 10px 25px; /* 减小内边距 */
-  font-size: 1.1rem; /* 减小按钮字体 */
-  background: rgba(70, 165, 255, 0.4);
+  padding: 10px 25px;
+  font-size: 1.1rem;
+  background: #1a2980; /* 蓝色按钮 */
   color: white;
-  border: 1px solid #40a9ff;
-  border-radius: 6px; /* 减小圆角 */
+  border: 1px solid #1a2980;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* 减小阴影 */
-  margin-top: 5px; /* 减小上边距 */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
 }
 
 .flow-btn:hover {
-  background: rgba(24, 144, 255, 0.8);
-  transform: translateY(-2px); /* 减小悬停位移 */
-  box-shadow: 0 3px 15px rgba(64, 169, 255, 0.6); /* 减小阴影 */
+  background: #0d1a5f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* 状态指示器 */
 .status-indicator {
   display: inline-block;
-  width: 10px; /* 减小尺寸 */
-  height: 10px; /* 减小尺寸 */
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  margin-right: 6px; /* 减小右边距 */
+  margin-right: 6px;
 }
 
-.running { background-color: #52c41a; box-shadow: 0 0 6px #52c41a; }
-.stopped { background-color: #f5222d; box-shadow: 0 0 6px #f5222d; }
+.running { background-color: #52c41a; }
+.stopped { background-color: #f5222d; }
 
-/* 数据项样式 - 压缩高度 */
+/* 数据项样式 */
 .data-item {
   display: flex;
   justify-content: space-between;
-  padding: 7px 0; /* 减小内边距 */
-  border-bottom: 1px solid rgba(64, 169, 255, 0.2);
-  font-size: 1.0rem; /* 减小字体大小 */
+  padding: 7px 0;
+  border-bottom: 1px solid #e0e6ed;
+  font-size: 1.0rem;
+  color: #333;
 }
 
 .data-item:last-child {
@@ -207,27 +205,28 @@ body {
 }
 
 .data-value {
-  color: #40a9ff;
+  color: #2c3e50;
   font-weight: bold;
-  text-shadow: 0 0 4px rgba(64, 169, 255, 0.7);
 }
 
 .unit {
-  color: #8c8c8c;
-  font-size: 0.85rem; /* 减小单位字体大小 */
-  margin-left: 2px; /* 减小左边距 */
+  color: #7f8c8d;
+  font-size: 0.85rem;
+  margin-left: 2px;
 }
 
-/* 时间显示 - 压缩 */
+/* 时间显示 - 蓝色背景 */
 .time-display {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.3rem; /* 减小字体大小 */
-  letter-spacing: 1px; /* 减小字间距 */
-  text-shadow: 0 0 8px rgba(64, 169, 255, 0.8);
-  padding: 8px 0; /* 减小内边距 */
-  margin-bottom: 10px; /* 减小下边距 */
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  padding: 8px 0;
+  margin-bottom: 10px;
+  background: #1a2980;
+  color: white;
+  border-radius: 6px;
 }
 
 /* 动画效果 */
@@ -243,8 +242,7 @@ body {
 
 /* 新增小图标样式 */
 .flow-item::before {
-  content: "▹"; /* 简单的小图标 */
+  content: "▹";
   margin-right: 6px;
   color: #52c41a;
-  text-shadow: 0 0 5px #52c41a;
 }
