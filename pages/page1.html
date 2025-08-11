@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>一键智能开井系统</title>
+  <title>水平井智能注排采一体化控制系统</title>
   <link rel="stylesheet" href="../css/Page1.css">
 </head>
 <body>
 <div class="container">
   <div class="header">
-    <h1>一键智能开井系统</h1>
+    <h1>水平井智能注排采一体化控制系统</h1>
   </div>
 
   <!-- 左侧面板 -->
@@ -41,37 +41,37 @@
       <div class="data-item">
         <span>1#负压机组运行状态：</span>
         <span>
-                        <span class="status-indicator stopped" id="unit1Status"></span>
-                        <span class="data-value" id="unit1StatusText">停止</span>
-                    </span>
+            <span class="status-indicator stopped" id="unit1Status"></span>
+            <span class="data-value" id="unit1StatusText">停止</span>
+        </span>
       </div>
       <div class="data-item">
         <span>2#负压机组运行状态：</span>
         <span>
-                        <span class="status-indicator stopped" id="unit2Status"></span>
-                        <span class="data-value" id="unit2StatusText">停止</span>
-                    </span>
+            <span class="status-indicator stopped" id="unit2Status"></span>
+            <span class="data-value" id="unit2StatusText">停止</span>
+        </span>
       </div>
       <div class="data-item">
         <span>3#负压机组运行状态：</span>
         <span>
-                        <span class="status-indicator stopped" id="unit3Status"></span>
-                        <span class="data-value" id="unit3StatusText">停止</span>
-                    </span>
+            <span class="status-indicator stopped" id="unit3Status"></span>
+            <span class="data-value" id="unit3StatusText">停止</span>
+        </span>
       </div>
       <div class="data-item">
         <span>4#负压机组运行状态：</span>
         <span>
-                        <span class="status-indicator stopped" id="unit4Status"></span>
-                        <span class="data-value" id="unit4StatusText">停止</span>
-                    </span>
+            <span class="status-indicator stopped" id="unit4Status"></span>
+            <span class="data-value" id="unit4StatusText">停止</span>
+        </span>
       </div>
       <div class="data-item">
         <span>5#气举机组运行状态：</span>
         <span>
-                        <span class="status-indicator stopped" id="unit5Status"></span>
-                        <span class="data-value" id="unit5StatusText">停止</span>
-                    </span>
+            <span class="status-indicator stopped" id="unit5Status"></span>
+            <span class="data-value" id="unit5StatusText">停止</span>
+        </span>
       </div>
       <div class="data-item">
         <span>6#气举机组运行状态：</span>
@@ -126,7 +126,7 @@
   <div class="panel-center">
     <div class="monitor-block">
       <div class="model-placeholder">
-        <img src="../img/equipment_3d_diagram_3.png" alt="设备3D图" class="model-image">
+        <img src="../img/equipment_3d_diagram_2.png" alt="设备3D图" class="model-image">
       </div>
     </div>
 
@@ -169,6 +169,7 @@
       <div class="flow-buttons">
         <button class="flow-btn">运行参数</button>
         <button class="flow-btn">加药页面</button>
+        <button id="btn_check" onclick="editUser(1, 'qaq')">前后端连接测试</button>
       </div>
     </div>
   </div>
@@ -248,5 +249,6 @@
 </div>
 
 <script src="../js/Page1.js"></script>
+<script src="../js/Page1-btn.js"></script>
 </body>
 </html>

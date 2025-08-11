@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"/>
+    <title>加药数据状态显示</title>
+    <style>
+        /* == 全局 & 屏幕撑满 == */
+        html, body {
+            height: 100%; margin: 0;
+            background: #F3F6FB;
+            color: #333334;
+            font-family: "Microsoft YaHei", sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            position: relative; width: 100%; height: 100%;
+        }
+        /* == 顶部标题栏 == */
+        .header {
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 60px; background: #0e3f75;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; font-weight: bold; color: #FFFFFF;
+        }
+        .header .timestamp {
+            position: absolute; right: 20px;
+            font-size: 14px; color: #FFFFFF;
+        }
+        /* == 主体：上下两区 平分 == */
+        .main {
+            position: absolute; top: 60px; bottom: 20px;
+            left: 20px; right: 20px;
+            display: flex; flex-direction: column; gap: 20px;
+        }
+        .top-panels, .bottom-panels {
+            flex: 1; display: flex; gap: 20px;
+        }
+        /* == 通用面板 == */
+        .panel {
+            flex: 1;
+            background: #FFFFFF;
+            border: 1px solid #0e3f75;
+            border-radius: 8px;
+            padding: 16px;
+            display: flex; flex-direction: column;
+            color: #333334;
+        }
+        .panel-header {
+            display: flex; align-items: center;
+            font-size: 18px; color: #0e3f75;
+            margin-bottom: 12px; padding-bottom: 8px;
+            border-bottom: 1px solid #0e3f75;
+        }
+        .panel-header .icon {
+            width: 20px; height: 20px;
+            margin-right: 8px;
+            background-size: contain;
+            display: inline-block;
+        }
+        .icon-eq    { background-image:url('equipment.svg'); }
+        .icon-valve { background-image:url('valve.svg'); }
+        .icon-data  { background-image:url('data.svg'); }
+        /* == 设备状态监控 == */
+        .status-lines {
+            flex: 1; display: flex;
+            flex-direction: column; gap: 12px;
+            justify-content: center;
+        }
+        .status-lines .line {
+            font-size: 14px; color: #333334;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .status-lines .value { color: #6afabf; font-weight: bold; }
+        .status-lines .indicator {
+            width: 12px; height: 12px; border-radius: 50%;
+            background: red; border: 1px solid #800;
+        }
+        .status-lines .running .indicator {
+            background: #3cff00; border-color: #0a3c00;
+        }
+        /* == 阀门状态指示 == */
+        .valve-grid {
+            flex: 1; display: flex;
+            flex-wrap: wrap; gap: 12px;
+            align-content: center;
+        }
+        .valve-grid .item {
+            width: 50%; display: flex;
+            justify-content: space-between;
+            font-size: 14px; color: #333334;
+        }
+        .valve-grid .dot {
+            width: 16px; height: 16px;
+            border-radius: 50%; background: red;
+            border: 1px solid #800;
+        }
+        /* == 数据监控 == */
+        .data-lines {
+            flex: 1; display: flex;
+            flex-direction: column; gap: 8px;
+            justify-content: center; font-size: 14px;
+            color: #333334;
+        }
+        .data-lines .value { color: #6afabf; font-weight: bold; }
+        /* == 下半区按钮面板 == */
+        .btn-grid-2x2 {
+            flex: 1; display: grid;
+            grid-template-columns: repeat(2,1fr);
+            grid-template-rows: repeat(2,1fr);
+            gap: 12px;
+            justify-items: center; align-items: center;
+        }
+        .btn-col {
+            flex: 1; display: flex; flex-direction: column;
+            gap: 12px; justify-content: center;
+        }
+        /* == 按钮统一样式 == */
+        .panel button {
+            background: #0e3f75;
+            color: #FFFFFF;
+            border: none; border-radius: 4px;
+            padding: 6px 16px; font-size: 14px;
+            cursor: pointer; outline: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        加药数据状态显示
+        <div class="timestamp">2025-07-15 12:52:03</div>
+    </div>
+    <div class="main">
+        <div class="top-panels">
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="icon icon-eq"></span>设备状态监控
+                </div>
+                <div class="status-lines">
+                    <div class="line running">
+                        <span>加药运行状态：</span><span class="value">运行正常</span>
+                        <span class="indicator"></span>
+                    </div>
+                    <div class="line">
+                        <span>当前模式：</span><span class="value">初始模式</span>
+                        <span class="indicator"></span>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-header">
+                        <span class="icon icon-eq"></span>加药状态监控
+                    </div>
+                    <div class="status-lines">
+                        <div class="line">
+                            <span>加药运行状态：</span>
+                            <span class="value">停止</span>
+                            <span class="indicator"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="icon icon-valve"></span>阀门状态指示
+                </div>
+                <div class="valve-grid">
+                    <div class="item"><span>1#开阀指示：</span><span class="dot"></span></div>
+                    <div class="item"><span>1#阀开到位：</span><span class="dot"></span></div>
+                    <div class="item"><span>1#关阀指示：</span><span class="dot"></span></div>
+                    <div class="item"><span>1#阀关到位：</span><span class="dot"></span></div>
+                    <div class="item"><span>2#开阀指示：</span><span class="dot"></span></div>
+                    <div class="item"><span>2#阀开到位：</span><span class="dot"></span></div>
+                    <div class="item"><span>2#关阀指示：</span><span class="dot"></span></div>
+                    <div class="item"><span>2#阀关到位：</span><span class="dot"></span></div>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="icon icon-data"></span>数据监控
+                </div>
+                <div class="data-lines">
+                    <div><span>压力：</span><span class="value">0</span><span>MPa</span></div>
+                    <div><span>液位：</span><span class="value">0</span><span>%</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-panels">
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="icon icon-eq"></span>模式选择
+                </div>
+                <div class="btn-grid-2x2">
+                    <button>1#气举</button>
+                    <button>1#加药</button>
+                    <button>2#气举</button>
+                    <button>2#加药</button>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="icon icon-valve"></span>入口阀门控制
+                </div>
+                <div class="btn-col">
+                    <button>1#入口球阀开</button>
+                    <button>2#入口球阀开</button>
+                </div>
+            </div>
+            <div class="panel">
+                <div class="panel-header">
+                    <span class="icon icon-eq"></span>页面按钮
+                </div>
+                <div class="btn-col">
+                    <button>主页面</button>
+                    <button>参数设置</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

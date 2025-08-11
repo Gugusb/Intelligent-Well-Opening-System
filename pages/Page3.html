@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <title>运行参数监控设置平台</title>
+    <style>
+        /* 重置 */
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: "Microsoft YaHei", sans-serif;
+            background: #041328;
+            color: #FFF;
+            overflow: hidden;
+        }
+
+        /* 容器 */
+        .container {
+            position: relative;
+            width: 100vw;  height: 100vh;
+        }
+
+        /* 顶部标题 */
+        .header {
+            position: absolute; top: 0; left: 0; right: 0;
+            height: 60px;
+            background: #0a1f44;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; font-weight: bold;
+        }
+        .header .timestamp {
+            position: absolute; right: 20px; font-size: 14px; color: #8ab5eb;
+        }
+
+        /* 主体区域左右分栏 */
+        .main {
+            position: absolute;
+            top: 60px; bottom: 80px;
+            left: 20px; right: 20px;
+            display: flex; gap: 20px;
+        }
+
+        /* 通用面板样式 */
+        .panel {
+            flex: 1;
+            background: rgba(10,31,68,0.6);
+            border: 1px solid #0e3f75;
+            border-radius: 8px;
+            padding: 16px;
+            display: flex; flex-direction: column;
+        }
+        .panel-header {
+            font-size: 18px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #1b548f;
+            display: flex; align-items: center;
+            margin-bottom: 12px;
+        }
+        .panel-header .icon {
+            display: inline-block;
+            width: 20px; height: 20px;
+            margin-right: 8px;
+            background-size: contain;
+        }
+        .icon-alarm   { background-image:url('alarm.svg'); }
+        .icon-control { background-image:url('control.svg'); }
+
+        /* 左侧：两列结构，123 文本在左，456 框在右 */
+        .param-columns {
+            display: flex;
+            gap: 20px;
+            flex: 1;
+        }
+        .param-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* 文本组（第 1/2/3 组） */
+        .param-text {
+            background: rgba(8,24,52,0.5);
+            border: 1px dashed #1b548f;
+            border-radius: 6px;
+            padding: 12px;
+        }
+        .param-text h3 {
+            font-size: 16px; color: #8ab5eb; margin-bottom: 8px;
+        }
+        .param-text p {
+            font-size: 14px; line-height: 1.6;
+        }
+        .param-text p span {
+            color: #6afabf;
+            font-weight: bold;
+        }
+
+        /* 框组（第 4/5/6 组） */
+        .param-box {
+            position: relative;
+            background: rgba(10,31,68,0.3);
+            border: 1px solid #1b548f;
+            border-radius: 6px;
+            padding: 30px 12px 12px;
+        }
+        .param-box .box-header {
+            position: absolute;
+            top: -12px; left: 12px;
+            background: #041328;
+            padding: 2px 8px;
+            font-size: 14px;
+            border: 1px solid #1b548f;
+            border-bottom: none;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }
+        .param-box .box-buttons button {
+            display: block;
+            width: 100%;
+            margin: 8px 0;
+            padding: 6px 0;
+            font-size: 14px;
+            color: #FFF;
+            background: rgba(26,60,128,0.8);
+            border: 1px solid #3a6a9f;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* 右侧：增压外输启停控制 */
+        .control-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            flex: 1;
+        }
+        .control-unit {
+            position: relative;
+            width: calc(50% - 8px);
+            background: rgba(8,24,52,0.5);
+            border: 1px solid #1b548f;
+            border-radius: 6px;
+            padding: 12px;
+            text-align: center;
+        }
+        .control-unit h4 {
+            font-size: 15px; color: #8ab5eb; margin-bottom: 8px;
+        }
+        .control-unit button {
+            width: 80%;
+            margin: 4px auto;
+            padding: 6px 0;
+            font-size: 14px;
+            color: #FFF;
+            background: rgba(26,60,128,0.8);
+            border: 1px solid #3a6a9f;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .control-unit .status {
+            position: absolute;
+            top: 12px; right: 12px;
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: #3cff00;
+            border: 1px solid #0a3c00;
+        }
+
+        /* 底部按钮 */
+        .footer {
+            margin-top: 12px;
+            display: flex; justify-content: center; gap: 40px;
+        }
+        .footer button {
+            width: 120px; height: 50px;
+            font-size: 18px; color: #FFF;
+            background: rgba(10,31,68,0.6);
+            border: 1px solid #1b548f;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <!-- 顶部 -->
+    <div class="header">
+        运行参数监控设置平台
+        <div class="timestamp">2025-07-15 12:51:24</div>
+    </div>
+
+    <div class="main">
+        <!-- 左侧：压力报警参数 -->
+        <div class="panel">
+            <div class="panel-header">
+                <span class="icon icon-alarm"></span>
+                压力报警参数
+            </div>
+
+            <!-- 两列：左边文案1/2/3，右边设置框4/5/6 -->
+            <div class="param-columns">
+                <!-- 左列：文字 -->
+                <div class="param-col">
+                    <!-- 1#2#3# -->
+                    <div class="param-text">
+                        <h3>1#2#3#压力报警参数</h3>
+                        <p>后端报警压力：<span>0</span> MPa</p>
+                        <p>后端恢复压力：<span>0</span> MPa</p>
+                    </div>
+                    <!-- 4#5# -->
+                    <div class="param-text">
+                        <h3>4#5#压力报警参数</h3>
+                        <p>后端报警压力：<span>0</span> MPa</p>
+                        <p>后端恢复压力：<span>0</span> MPa</p>
+                    </div>
+                    <!-- 气举1#2# -->
+                    <div class="param-text">
+                        <h3>气举1#2#压力报警参数</h3>
+                        <p>1#后端报警压力：<span>0</span> MPa</p>
+                        <p>1#后端恢复压力：<span>0</span> MPa</p>
+                        <p>2#后端报警压力：<span>0</span> MPa</p>
+                    </div>
+                </div>
+
+                <!-- 右列：设置框 -->
+                <div class="param-col">
+                    <!-- 对应 1#2#3# -->
+                    <div class="param-box">
+                        <div class="box-header">1#2#3#</div>
+                        <div class="box-buttons">
+                            <button>后端报警压力设置</button>
+                            <button>后端恢复压力设置</button>
+                        </div>
+                    </div>
+                    <!-- 对应 4#5# -->
+                    <div class="param-box">
+                        <div class="box-header">4#5#</div>
+                        <div class="box-buttons">
+                            <button>后端报警压力设置</button>
+                            <button>后端恢复压力设置</button>
+                        </div>
+                    </div>
+                    <!-- 对应 气举1#2# -->
+                    <div class="param-box">
+                        <div class="box-header">气举1#2#</div>
+                        <div class="box-buttons">
+                            <button>1#报警压力设置</button>
+                            <button>1#恢复压力设置</button>
+                            <button>2#报警压力设置</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- 右侧：增压外输启停控制 -->
+        <div class="panel">
+            <div class="panel-header">
+                <span class="icon icon-control"></span>
+                增压外输启停控制
+            </div>
+            <div class="control-grid">
+                <!-- 1#机组 -->
+                <div class="control-unit">
+                    <span class="status"></span>
+                    <h4>1#机组</h4>
+                    <button>机组启用</button>
+                    <button>机组停用</button>
+                </div>
+                <!-- 2#机组 -->
+                <div class="control-unit">
+                    <span class="status"></span>
+                    <h4>2#机组</h4>
+                    <button>机组启用</button>
+                    <button>机组停用</button>
+                </div>
+                <!-- 3#机组 -->
+                <div class="control-unit">
+                    <span class="status"></span>
+                    <h4>3#机组</h4>
+                    <button>机组启用</button>
+                    <button>机组停用</button>
+                </div>
+                <!-- 4#机组 -->
+                <div class="control-unit">
+                    <span class="status"></span>
+                    <h4>4#机组</h4>
+                    <button>机组启用</button>
+                    <button>机组停用</button>
+                </div>
+                <!-- 5#机组 -->
+                <div class="control-unit">
+                    <span class="status"></span>
+                    <h4>5#机组</h4>
+                    <button>机组启用</button>
+                    <button>机组停用</button>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="footer">
+                    <button>上一页</button>
+                    <button>主页面</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
