@@ -39,9 +39,9 @@ body::before {
   justify-content: space-between;
   align-items: center;
   padding: 20px 30px;
-  background: #1a2980; /* 蓝色背景 */
+  background: #3684ec; /* 蓝色背景 */
   border-radius: 15px;
-  border: 1px solid #1a2980;
+  border: 1px solid #3684ec;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 更柔和的阴影 */
 }
 
@@ -54,7 +54,7 @@ body::before {
 
 .time-display {
   font-size: 1.6rem;
-  background: #1a2980; /* 蓝色背景 */
+  background: #3684ec; /* 蓝色背景 */
   padding: 10px 20px;
   border-radius: 10px;
   border: 1px solid #1a2980;
@@ -194,8 +194,8 @@ body::before {
 
 .input-field:focus {
   outline: none;
-  box-shadow: 0 0 5px rgb(26, 41, 128); /* 蓝色高亮 */
-  border-color: #1a2980; /* 蓝色边框 */
+  box-shadow: 0 0 5px rgb(54, 132, 236); /* 蓝色高亮 */
+  border-color: #3684ec; /* 蓝色边框 */
 }
 
 .time-label {
@@ -227,7 +227,7 @@ body::before {
 
 .nav-button {
   padding: 14px 22px;
-  background: #1a2980; /* 蓝色背景 */
+  background: #3684ec; /* 蓝色背景 */
   color: white; /* 白色文字 */
   border: none;
   border-radius: 50px;
@@ -243,7 +243,7 @@ body::before {
 .nav-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-  background: #1a2980; /* 深蓝色 */
+  background: #3684ec; /* 深蓝色 */
 }
 
 .nav-button:active {
@@ -260,7 +260,7 @@ body::before {
 
 .setting-button {
   padding: 10px 5px;
-  background: #1a2980; /* 蓝色背景 */
+  background: #3684ec; /* 蓝色背景 */
   color: white; /* 白色文字 */
   border: none;
   border-radius: 8px;

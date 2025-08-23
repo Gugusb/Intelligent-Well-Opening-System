@@ -44,6 +44,23 @@ const deviceStatus = {
   }
 };
 
+//页面跳转
+function toPage2() {
+  // 跳转到同目录下的Page2.html页面
+  window.location.href = 'Page2.html';
+
+  // 如果需要在新标签页中打开，可以使用下面这行代码
+  // window.open('Page2.html', '_blank');
+}
+
+function toPage4() {
+  // 跳转到同目录下的Page2.html页面
+  window.location.href = 'Page4.html';
+
+  // 如果需要在新标签页中打开，可以使用下面这行代码
+  // window.open('Page2.html', '_blank');
+}
+
 // 更新指定ID的元素值
 function updateElement(id, value) {
   const element = document.getElementById(id);
@@ -182,14 +199,14 @@ function updateTime() {
   document.getElementById('currentTime').textContent = timeStr;
 }
 
-// 按钮事件处理
-function setupButtonEvents() {
-  document.querySelectorAll('.flow-btn').forEach((button, index) => {
-    button.addEventListener('click', () => {
-      alert(index === 0 ? '运行参数页面即将打开...' : '加药页面即将打开...');
-    });
-  });
-}
+// // 按钮事件处理
+// function setupButtonEvents() {
+//   document.querySelectorAll('.flow-btn').forEach((button, index) => {
+//     button.addEventListener('click', () => {
+//       alert(index === 0 ? '运行参数页面即将打开...' : '加药页面即将打开...');
+//     });
+//   });
+// }
 
 // 从后端获取数据
 async function fetchData() {

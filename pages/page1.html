@@ -11,27 +11,26 @@
   <div class="header">
     <h1>水平井智能注排采一体化控制系统</h1>
   </div>
-
   <!-- 左侧面板 -->
   <div class="panel-left">
     <div class="monitor-block">
       <h2>设备状态监控</h2>
       <div class="data-item">
         <span>当前模式：</span>
-        <span class="data-value" id="currentMode">正常模式</span>
+        <span class="data-value"  id="currentMode">正常模式</span>
       </div>
       <div class="data-item">
         <span>左电气箱状态：</span>
         <span>
-                        <span class="status-indicator running" id="leftElecStatus"></span>
-                        <span class="data-value" id="leftElecText">运行正常</span>
-                    </span>
+            <span class="status-indicator running" id="leftElecStatus"></span>
+            <span class="data-value"  id="leftElecText">运行正常</span>
+        </span>
       </div>
       <div class="data-item">
         <span>右电气箱状态：</span>
         <span>
                         <span class="status-indicator running" id="rightElecStatus"></span>
-                        <span class="data-value" id="rightElecText">运行正常</span>
+                        <span class="data-value"  id="rightElecText">运行正常</span>
                     </span>
       </div>
     </div>
@@ -41,8 +40,8 @@
       <div class="data-item">
         <span>1#负压机组运行状态：</span>
         <span>
-            <span class="status-indicator stopped" id="unit1Status"></span>
-            <span class="data-value" id="unit1StatusText">停止</span>
+            <span class="status-indicator stopped"  id="unit1Status"></span>
+            <span class="data-value"  id="unit1StatusText">停止</span>
         </span>
       </div>
       <div class="data-item">
@@ -130,6 +129,7 @@
       </div>
     </div>
 
+
     <!-- 新增的流量监控面板 -->
     <div class="flow-monitor monitor-block">
       <h2>设备流量监控</h2>
@@ -167,9 +167,8 @@
       </div>
       <!-- 页面按钮区域 -->
       <div class="flow-buttons">
-        <button class="flow-btn">运行参数</button>
-        <button class="flow-btn">加药页面</button>
-        <button id="btn_check" onclick="editUser(1, 'qaq')">前后端连接测试</button>
+        <button class="flow-btn" onclick="toPage2()">运行参数</button>
+        <button class="flow-btn" onclick="toPage4()">加药页面</button>
       </div>
     </div>
   </div>

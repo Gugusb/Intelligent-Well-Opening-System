@@ -28,33 +28,256 @@ function updateTime() {
   document.getElementById('currentTime').textContent = timeStr;
 }
 
-// 刷新所有参数显示
-function refreshAllParameters() {
-  // 更新机组参数显示
-  for (const unitId in parameters.units) {
-    const unit = parameters.units[unitId];
-    document.getElementById(`unit${unitId}-start-time`).textContent =
-      `${unit.startHr} 时 ${unit.startMin} 分`;
-    document.getElementById(`unit${unitId}-stop-time`).textContent =
-      `${unit.stopHr} 时 ${unit.stopMin} 分`;
-    document.getElementById(`unit${unitId}-start-pressure-val`).textContent =
-      `${unit.startPressure} MPa`;
-    document.getElementById(`unit${unitId}-stop-pressure-val`).textContent =
-      `${unit.stopPressure} MPa`;
-    document.getElementById(`unit${unitId}-left-valve-val`).textContent =
-      `${unit.leftValve} S`;
-    document.getElementById(`unit${unitId}-right-valve-val`).textContent =
-      `${unit.rightValve} S`;
+async function refreshAllParameters() {
+  try {
+    // 使用正确的URL获取数据
+    const backendData = await fetchData('http://localhost:8080/page2/getlastdata');
+
+    if (!backendData) return; // 获取数据失败时保留原参数
+
+    // 转换数据结构（更简洁的映射方式）
+    const newParameters = {
+      units: {},
+      gasLifts: {}
+    };
+
+    // 批量映射机组参数
+    [1, 2, 3, 4, 5].forEach(unitId => {
+      newParameters.units[unitId] = {
+        startHr: backendData[`unit${unitId}StartHour`],
+        startMin: backendData[`unit${unitId}StartMinute`],
+        stopHr: backendData[`unit${unitId}StopHour`],
+        stopMin: backendData[`unit${unitId}StopMinute`],
+        startPressure: backendData[`unit${unitId}StartPressure`],
+        stopPressure: backendData[`unit${unitId}StopPressure`],
+        leftValve: backendData[`unit${unitId}LeftValveTime`],
+        rightValve: backendData[`unit${unitId}RightValveTime`]
+      };
+    });
+
+    // 映射气举参数
+    newParameters.gasLifts['1'] = {
+      leftValve: backendData.gaslift1LeftValveTime,
+      rightValve: backendData.gaslift1RightValveTime
+    };
+
+    newParameters.gasLifts['2'] = {
+      leftValve: backendData.gaslift2LeftValveTime,
+      rightValve: backendData.gaslift2RightValveTime
+    };
+
+    // 更新全局参数对象
+    parameters = newParameters;
+
+    // 更新页面显示（原有DOM更新逻辑保持不变）
+    for (const unitId in parameters.units) {
+      const unit = parameters.units[unitId];
+      document.getElementById(`unit${unitId}StartTime`).textContent = `${unit.startHr} 时 ${unit.startMin} 分`;
+      document.getElementById(`unit${unitId}StopTime`).textContent = `${unit.stopHr} 时 ${unit.stopMin} 分`;
+      document.getElementById(`unit${unitId}StartPressure`).textContent = `${unit.startPressure} MPa`;
+      document.getElementById(`unit${unitId}StopPressure`).textContent = `${unit.stopPressure} MPa`;
+      document.getElementById(`unit${unitId}LeftValveTime`).textContent = `${unit.leftValve} S`;
+      document.getElementById(`unit${unitId}RightValveTime`).textContent = `${unit.rightValve} S`;
+    }
+
+    // 更新气举参数显示
+    const gas1 = parameters.gasLifts['1'];
+    document.getElementById('gaslift1LeftValveTime').textContent = `${gas1.leftValve} S`;
+    document.getElementById('gaslift1RightValveTime').textContent = `${gas1.rightValve} S`;
+
+    const gas2 = parameters.gasLifts['2'];
+    document.getElementById('gaslift2RightValveTime').textContent = `${gas2.leftValve} S`;
+    document.getElementById('gaslift2RightValveTime').textContent = `${gas2.rightValve} S`;
+
+  } catch (error) {
+    console.error('参数更新失败:', error);
+    // 显示错误信息
+    document.getElementById('errorMessage').textContent = `数据更新失败: ${error.message}`;
+    document.getElementById('errorMessage').style.display = 'block';
+
+    // 5秒后隐藏错误信息
+    setTimeout(() => {
+      document.getElementById('errorMessage').style.display = 'none';
+    }, 5000);
+  }
+}
+
+// 修改后的fetchData函数（支持动态URL）
+async function fetchData(url) {
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'}
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP错误! 状态码: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    if (result.code === 200) {
+      return result.data;
+    } else {
+      throw new Error(`业务错误: ${result.message} (代码: ${result.code})`);
+    }
+
+  } catch (error) {
+    console.error('请求发生错误:', error);
+    // 显示错误信息
+    document.getElementById('errorMessage').textContent = `获取数据失败: ${error.message}`;
+    document.getElementById('errorMessage').style.display = 'block';
+
+    // 5秒后隐藏错误信息
+    setTimeout(() => {
+      document.getElementById('errorMessage').style.display = 'none';
+    }, 5000);
+
+    return null;
+  }
+}
+
+// 生成请求体的函数
+function generateRequestBody(dataType, dataValue, dataPlace) {
+
+  // 创建基础请求体对象
+  const requestBody = {
+    dataType: dataType,
+    dataFloat: null,
+    dataBoolean: null,
+    dataShort: null,
+    place: dataPlace
+  };
+
+  // 根据数据类型设置相应的值
+  switch(dataType) {
+    case 'float':
+      requestBody.dataFloat = parseFloat(dataValue);
+      break;
+    case 'boolean':
+      requestBody.dataBoolean = dataValue.toLowerCase() === 'true';
+      break;
+    case 'short':
+      requestBody.dataShort = parseInt(dataValue);
+      break;
+  }
+  return JSON.stringify(requestBody);
+}
+
+async function updateRequest(dataType, dataValue, dataPlace) {
+  // 显示加载指示器
+  showLoadingIndicator();
+
+  const url = `http://localhost:8080/opcua/writedata`;
+
+  try {
+    // 创建请求体
+    const requestBody = generateRequestBody(dataType, dataValue, dataPlace);
+
+    const response = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: requestBody
+    });
+
+    // 处理HTTP错误
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`HTTP错误! 状态码: ${response.status}, 详情: ${errorText}`);
+    }
+
+    // 解析JSON响应
+    const result = await response.json();
+    console.log("请求修改数据响应:", result);
+
+    // 检查业务状态码
+    if (result.code === 200) {
+      // 成功弹出确认信息
+      alert(`✅ 信息更新成功，页面数据显示可能有30秒的延迟`);
+
+      // 如果需要，返回更新后的数据
+      return result.data;
+    } else {
+      // 处理业务错误
+      throw new Error(`更新失败: ${result.message} (代码: ${result.code})`);
+    }
+
+  } catch (error) {
+    console.error('更新错误:', error);
+
+    // 弹出错误信息
+    alert(
+      `❌ 信息更新失败！\n\n` +
+      `错误原因: ${error.message}\n\n` +
+      `请检查网络或联系管理员`
+    );
+
+    // 返回错误
+    throw error;
+  } finally {
+    // 无论成功或失败，都隐藏加载指示器
+    hideLoadingIndicator();
+  }
+}
+
+// 显示加载指示器
+function showLoadingIndicator() {
+  // 创建加载指示器元素
+  const loadingOverlay = document.createElement('div');
+  loadingOverlay.id = 'loading-overlay';
+  loadingOverlay.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+  `;
+
+  // 创建旋转动画元素
+  const spinner = document.createElement('div');
+  spinner.style.cssText = `
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  `;
+
+  // 添加旋转动画的CSS
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  `;
+
+  // 添加到DOM
+  document.head.appendChild(style);
+  loadingOverlay.appendChild(spinner);
+  document.body.appendChild(loadingOverlay);
+
+  // 禁用页面交互
+  document.body.style.pointerEvents = 'none';
+}
+
+// 隐藏加载指示器
+function hideLoadingIndicator() {
+  const loadingOverlay = document.getElementById('loading-overlay');
+  if (loadingOverlay) {
+    loadingOverlay.remove();
   }
 
-  // 更新气举参数显示
-  const gas1 = parameters.gasLifts['1'];
-  document.getElementById('gas1-left-valve-val').textContent = `${gas1.leftValve} S`;
-  document.getElementById('gas1-right-valve-val').textContent = `${gas1.rightValve} S`;
-
-  const gas2 = parameters.gasLifts['2'];
-  document.getElementById('gas2-left-valve-val').textContent = `${gas2.leftValve} S`;
-  document.getElementById('gas2-right-valve-val').textContent = `${gas2.rightValve} S`;
+  // 恢复页面交互
+  document.body.style.pointerEvents = 'auto';
 }
 
 // 创建参数输入模态框
@@ -139,33 +362,25 @@ function createParameterInputModal(unitId, paramType, paramName) {
     const value = parseFloat(input.value);
     if (!isNaN(value)) {
       // 根据参数类型更新对应变量
-      if (paramType === 'start-hr') {
-        parameters.units[unitId].startHr = value;
-      } else if (paramType === 'start-min') {
-        parameters.units[unitId].startMin = value;
-      } else if (paramType === 'stop-hr') {
-        parameters.units[unitId].stopHr = value;
-      } else if (paramType === 'stop-min') {
-        parameters.units[unitId].stopMin = value;
-      } else if (paramType === 'start-pressure') {
-        parameters.units[unitId].startPressure = value;
-      } else if (paramType === 'stop-pressure') {
-        parameters.units[unitId].stopPressure = value;
-      } else if (paramType === 'left-valve') {
-        if (unitId.startsWith('gas')) {
-          const gasId = unitId.replace('gas', '');
-          parameters.gasLifts[gasId].leftValve = value;
-        } else {
-          parameters.units[unitId].leftValve = value;
-        }
-      } else if (paramType === 'right-valve') {
-        if (unitId.startsWith('gas')) {
-          const gasId = unitId.replace('gas', '');
-          parameters.gasLifts[gasId].rightValve = value;
-        } else {
-          parameters.units[unitId].rightValve = value;
-        }
-      }
+      // 确定更新数据的类型-全部为short
+      datatype = "short"
+      // 组装目标地址
+      place = "gugu通道1"
+      if(unitId <= 3)place += ".混输气举撬123"
+      else place += ".混输气举撬456"
+
+      if(unitId <= 5)place += "." + unitId + "#"
+      else if(unitId == "gas1")place += ".气举1#"
+      else place += ".气举2#"
+
+      if(paramType == "right-valve" || paramType == "left-valve") {}
+      else place += "机"
+
+      place += paramName;
+
+      // 发送put请求
+      updateRequest(datatype, value, place)
+
       // 立即刷新显示
       refreshAllParameters();
     }
@@ -199,10 +414,10 @@ function handleSettingButtonClick() {
 
   // 确定参数名称
   const paramNames = {
-    'start-hr': '启动小时',
-    'start-min': '启动分钟',
-    'stop-hr': '停止小时',
-    'stop-min': '停止分钟',
+    'start-hr': '启动-小时',
+    'start-min': '启动-分钟',
+    'stop-hr': '停止-小时',
+    'stop-min': '停止-分钟',
     'start-pressure': '启动压力',
     'stop-pressure': '停止压力',
     'left-valve': '左阀时间',
@@ -243,23 +458,14 @@ document.addEventListener('DOMContentLoaded', () => {
     button.addEventListener('click', handleSettingButtonClick);
   });
 
-  // 设置导航按钮效果
-  const navButtons = document.querySelectorAll('.nav-button');
-  navButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      button.style.boxShadow = '0 0 20px rgba(64, 224, 255, 0.8)';
-      button.style.transform = 'scale(0.98)';
-      setTimeout(() => {
-        button.style.boxShadow = '';
-        button.style.transform = '';
-      }, 200);
 
-      // 提示功能
-      if (button.textContent === '下一页') {
-        alert('即将进入下一页设置界面');
-      } else {
-        alert('返回主监控页面');
-      }
-    });
-  });
 });
+
+//页面跳转
+function toPage3() {
+  window.location.href = 'Page3.html';
+}
+
+function toPage1() {
+  window.location.href = 'Page1.html';
+}

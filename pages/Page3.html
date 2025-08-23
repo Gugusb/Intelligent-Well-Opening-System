@@ -1,314 +1,589 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8" />
-    <title>运行参数监控设置平台</title>
-    <style>
-        /* 重置 */
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: "Microsoft YaHei", sans-serif;
-            background: #041328;
-            color: #FFF;
-            overflow: hidden;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>运行参数监控设置平台</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-bg: #FFFFFF;
+      --panel-bg: #1E88E5;
+      --card-bg: #FFFFFF;
+      --border-color: #E0E0E0;
+      --accent-color: #1E88E5;
+      --highlight: #1E88E5;
+      --warning: #FF9800;
+      --success: #4CAF50;
+      --danger: #F44336;
+      --text-primary: #212121;
+      --text-secondary: #757575;
+      --grid-line: rgba(0, 0, 0, 0.05);
+    }
 
-        /* 容器 */
-        .container {
-            position: relative;
-            width: 100vw;  height: 100vh;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Microsoft YaHei", "Segoe UI", "PingFang SC", sans-serif;
+    }
 
-        /* 顶部标题 */
-        .header {
-            position: absolute; top: 0; left: 0; right: 0;
-            height: 60px;
-            background: #0a1f44;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 24px; font-weight: bold;
-        }
-        .header .timestamp {
-            position: absolute; right: 20px; font-size: 14px; color: #8ab5eb;
-        }
+    body {
+      background-color: var(--primary-bg);
+      color: var(--text-primary);
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
 
-        /* 主体区域左右分栏 */
-        .main {
-            position: absolute;
-            top: 60px; bottom: 80px;
-            left: 20px; right: 20px;
-            display: flex; gap: 20px;
-        }
+    .grid-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 30px 30px;
+      background-position: center;
+      opacity: 0.5;
+      z-index: -3;
+    }
 
-        /* 通用面板样式 */
-        .panel {
-            flex: 1;
-            background: rgba(10,31,68,0.6);
-            border: 1px solid #0e3f75;
-            border-radius: 8px;
-            padding: 16px;
-            display: flex; flex-direction: column;
-        }
-        .panel-header {
-            font-size: 18px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #1b548f;
-            display: flex; align-items: center;
-            margin-bottom: 12px;
-        }
-        .panel-header .icon {
-            display: inline-block;
-            width: 20px; height: 20px;
-            margin-right: 8px;
-            background-size: contain;
-        }
-        .icon-alarm   { background-image:url('alarm.svg'); }
-        .icon-control { background-image:url('control.svg'); }
+    .glow {
+      display: none;
+    }
 
-        /* 左侧：两列结构，123 文本在左，456 框在右 */
-        .param-columns {
-            display: flex;
-            gap: 20px;
-            flex: 1;
-        }
-        .param-col {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
+    .container {
+      display: grid;
+      grid-template-rows: 70px 1fr 70px;
+      height: 100vh;
+      padding: 15px;
+      gap: 15px;
+      position: relative;
+      z-index: 1;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
 
-        /* 文本组（第 1/2/3 组） */
-        .param-text {
-            background: rgba(8,24,52,0.5);
-            border: 1px dashed #1b548f;
-            border-radius: 6px;
-            padding: 12px;
-        }
-        .param-text h3 {
-            font-size: 16px; color: #8ab5eb; margin-bottom: 8px;
-        }
-        .param-text p {
-            font-size: 14px; line-height: 1.6;
-        }
-        .param-text p span {
-            color: #6afabf;
-            font-weight: bold;
-        }
+    .header {
+      background: var(--panel-bg);
+      border: none;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 25px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      min-height: 70px;
+    }
 
-        /* 框组（第 4/5/6 组） */
-        .param-box {
-            position: relative;
-            background: rgba(10,31,68,0.3);
-            border: 1px solid #1b548f;
-            border-radius: 6px;
-            padding: 30px 12px 12px;
-        }
-        .param-box .box-header {
-            position: absolute;
-            top: -12px; left: 12px;
-            background: #041328;
-            padding: 2px 8px;
-            font-size: 14px;
-            border: 1px solid #1b548f;
-            border-bottom: none;
-            border-top-left-radius: 4px;
-            border-top-right-radius: 4px;
-        }
-        .param-box .box-buttons button {
-            display: block;
-            width: 100%;
-            margin: 8px 0;
-            padding: 6px 0;
-            font-size: 14px;
-            color: #FFF;
-            background: rgba(26,60,128,0.8);
-            border: 1px solid #3a6a9f;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #0D47A1, #1E88E5);
+      border-radius: 5px 5px 0 0;
+    }
 
-        /* 右侧：增压外输启停控制 */
-        .control-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            flex: 1;
-        }
-        .control-unit {
-            position: relative;
-            width: calc(50% - 8px);
-            background: rgba(8,24,52,0.5);
-            border: 1px solid #1b548f;
-            border-radius: 6px;
-            padding: 12px;
-            text-align: center;
-        }
-        .control-unit h4 {
-            font-size: 15px; color: #8ab5eb; margin-bottom: 8px;
-        }
-        .control-unit button {
-            width: 80%;
-            margin: 4px auto;
-            padding: 6px 0;
-            font-size: 14px;
-            color: #FFF;
-            background: rgba(26,60,128,0.8);
-            border: 1px solid #3a6a9f;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .control-unit .status {
-            position: absolute;
-            top: 12px; right: 12px;
-            width: 12px; height: 12px;
-            border-radius: 50%;
-            background: #3cff00;
-            border: 1px solid #0a3c00;
-        }
+    .header-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      letter-spacing: 1px;
+    }
 
-        /* 底部按钮 */
-        .footer {
-            margin-top: 12px;
-            display: flex; justify-content: center; gap: 40px;
-        }
-        .footer button {
-            width: 120px; height: 50px;
-            font-size: 18px; color: #FFF;
-            background: rgba(10,31,68,0.6);
-            border: 1px solid #1b548f;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-    </style>
+    .timestamp {
+      font-size: 16px;
+      color: white;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 6px 12px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* 主内容区域优化 */
+    .main-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    /* 面板高度优化 */
+    .panel {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      height: calc(100vh - 160px); /* 增大面板高度 */
+    }
+
+    .panel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--accent-color);
+      border-radius: 5px 5px 0 0;
+    }
+
+    .panel-header {
+      font-size: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      font-weight: bold;
+      color: var(--accent-color);
+      letter-spacing: 1px;
+      flex-shrink: 0; /* 防止头部被压缩 */
+    }
+
+    .icon-alarm {
+      color: var(--warning);
+      font-size: 22px;
+      margin-right: 10px;
+    }
+
+    /* 参数组添加滚动功能 */
+    .param-group {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      overflow-y: auto; /* 添加垂直滚动条 */
+      padding-right: 5px;
+      flex-grow: 1; /* 占用可用空间 */
+    }
+
+    /* 优化滚动条样式 */
+    .param-group::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .param-group::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .param-group::-webkit-scrollbar-thumb {
+      background: var(--accent-color);
+      border-radius: 3px;
+    }
+
+    .param-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 15px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      min-height: 140px; /* 确保最小高度 */
+    }
+
+    .param-section:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border-color: var(--accent-color);
+    }
+
+    .section-title {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: var(--accent-color);
+      font-weight: bold;
+      position: relative;
+      padding-left: 10px;
+    }
+
+    .section-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 4px;
+      height: 80%;
+      background: var(--accent-color);
+      border-radius: 2px;
+    }
+
+    .param-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 15px;
+      padding: 5px 0;
+      color: var(--text-primary);
+    }
+
+    .param-value {
+      color: var(--text-primary);
+      font-weight: bold;
+      font-size: 16px;
+      min-width: 60px;
+      text-align: right;
+    }
+
+    .unit-label {
+      color: var(--text-secondary);
+      font-size: 14px;
+      margin-left: 3px;
+    }
+
+    .settings-section {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 30px 15px 15px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .settings-section:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .settings-title {
+      position: absolute;
+      top: -12px;
+      left: 15px;
+      background: var(--accent-color);
+      padding: 4px 18px;
+      font-size: 16px;
+      border: 1px solid var(--accent-color);
+      border-bottom: none;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .setting-btn {
+      padding: 10px 5px;
+      font-size: 14px;
+      color: white;
+      background: var(--accent-color);
+      border: 1px solid var(--accent-color);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .setting-btn:hover {
+      background: #1565C0;
+      transform: scale(1.03);
+    }
+
+    /* 控制单元样式 */
+    .control-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      flex: 1;
+      margin-top: 20px;
+      overflow-y: auto; /* 支持滚动 */
+      padding-bottom: 10px;
+    }
+
+    /* 优化控制单元高度 */
+    .control-unit {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 20px 15px;
+      text-align: center;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      min-height: 150px; /* 最小高度 */
+    }
+
+    .control-unit:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .unit-title {
+      font-size: 17px;
+      margin-bottom: 15px;
+      color: var(--text-primary);
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .status-indicator {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #BDBDBD;
+      border: 1px solid #9E9E9E;
+      margin-right: 10px;
+    }
+
+    .status-on {
+      background: var(--success);
+      box-shadow: 0 0 10px rgba(76, 175, 80, 0.5);
+    }
+
+    .status-off {
+      background: var(--danger);
+      box-shadow: 0 0 10px rgba(244, 67, 54, 0.5);
+    }
+
+    .control-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .control-btn {
+      padding: 10px 0;
+      font-size: 14px;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+      font-weight: 500;
+    }
+
+    .start-btn {
+      background: var(--success);
+    }
+
+    .stop-btn {
+      background: var(--danger);
+    }
+
+    .control-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* 底部按钮 */
+    .footer {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 0 20px;
+    }
+
+    .footer-btn {
+      width: 140px;
+      height: 50px;
+      font-size: 18px;
+      font-weight: 500;
+      color: white;
+      background: var(--accent-color);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .footer-btn:hover {
+      background: #1565C0;
+      transform: translateY(-3px);
+    }
+
+    /* 状态指示器动画 */
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+
+    .status-on {
+      animation: pulse 2s infinite;
+    }
+  </style>
 </head>
-
 <body>
+<!-- 背景元素 -->
+<div class="grid-bg"></div>
+
 <div class="container">
-    <!-- 顶部 -->
-    <div class="header">
-        运行参数监控设置平台
-        <div class="timestamp">2025-07-15 12:51:24</div>
-    </div>
+  <!-- 顶部标题和时间 -->
+  <div class="header">
+    <div class="header-title">运行参数监控设置平台</div>
+    <div class="timestamp" id="current-time">2025-08-19 22:47:43</div>
+  </div>
 
-    <div class="main">
-        <!-- 左侧：压力报警参数 -->
-        <div class="panel">
-            <div class="panel-header">
-                <span class="icon icon-alarm"></span>
-                压力报警参数
-            </div>
+  <!-- 主内容区域 -->
+  <div class="main-content">
+    <!-- 左侧：压力报警参数模块 -->
+    <div class="panel">
+      <div class="panel-header">
+        <i class="fas fa-exclamation-triangle icon-alarm"></i>
+        压力报警参数
+      </div>
 
-            <!-- 两列：左边文案1/2/3，右边设置框4/5/6 -->
-            <div class="param-columns">
-                <!-- 左列：文字 -->
-                <div class="param-col">
-                    <!-- 1#2#3# -->
-                    <div class="param-text">
-                        <h3>1#2#3#压力报警参数</h3>
-                        <p>后端报警压力：<span>0</span> MPa</p>
-                        <p>后端恢复压力：<span>0</span> MPa</p>
-                    </div>
-                    <!-- 4#5# -->
-                    <div class="param-text">
-                        <h3>4#5#压力报警参数</h3>
-                        <p>后端报警压力：<span>0</span> MPa</p>
-                        <p>后端恢复压力：<span>0</span> MPa</p>
-                    </div>
-                    <!-- 气举1#2# -->
-                    <div class="param-text">
-                        <h3>气举1#2#压力报警参数</h3>
-                        <p>1#后端报警压力：<span>0</span> MPa</p>
-                        <p>1#后端恢复压力：<span>0</span> MPa</p>
-                        <p>2#后端报警压力：<span>0</span> MPa</p>
-                    </div>
-                </div>
-
-                <!-- 右列：设置框 -->
-                <div class="param-col">
-                    <!-- 对应 1#2#3# -->
-                    <div class="param-box">
-                        <div class="box-header">1#2#3#</div>
-                        <div class="box-buttons">
-                            <button>后端报警压力设置</button>
-                            <button>后端恢复压力设置</button>
-                        </div>
-                    </div>
-                    <!-- 对应 4#5# -->
-                    <div class="param-box">
-                        <div class="box-header">4#5#</div>
-                        <div class="box-buttons">
-                            <button>后端报警压力设置</button>
-                            <button>后端恢复压力设置</button>
-                        </div>
-                    </div>
-                    <!-- 对应 气举1#2# -->
-                    <div class="param-box">
-                        <div class="box-header">气举1#2#</div>
-                        <div class="box-buttons">
-                            <button>1#报警压力设置</button>
-                            <button>1#恢复压力设置</button>
-                            <button>2#报警压力设置</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
+      <div class="param-group">
+        <!-- 1#2#3#机组报警参数 -->
+        <div class="param-section">
+          <h3 class="section-title">1#2#3#压力报警参数</h3>
+          <div class="param-row">
+            <span>后端报警压力: <span id="backendAlarmPressure123" class="param-value">8.4</span><span class="unit-label">MPa</span></span>
+            <span>后端恢复压力: <span id="backendRecoveryPressure123" class="param-value">5.2</span><span class="unit-label">MPa</span></span>
+          </div>
         </div>
 
-        <!-- 右侧：增压外输启停控制 -->
-        <div class="panel">
-            <div class="panel-header">
-                <span class="icon icon-control"></span>
-                增压外输启停控制
-            </div>
-            <div class="control-grid">
-                <!-- 1#机组 -->
-                <div class="control-unit">
-                    <span class="status"></span>
-                    <h4>1#机组</h4>
-                    <button>机组启用</button>
-                    <button>机组停用</button>
-                </div>
-                <!-- 2#机组 -->
-                <div class="control-unit">
-                    <span class="status"></span>
-                    <h4>2#机组</h4>
-                    <button>机组启用</button>
-                    <button>机组停用</button>
-                </div>
-                <!-- 3#机组 -->
-                <div class="control-unit">
-                    <span class="status"></span>
-                    <h4>3#机组</h4>
-                    <button>机组启用</button>
-                    <button>机组停用</button>
-                </div>
-                <!-- 4#机组 -->
-                <div class="control-unit">
-                    <span class="status"></span>
-                    <h4>4#机组</h4>
-                    <button>机组启用</button>
-                    <button>机组停用</button>
-                </div>
-                <!-- 5#机组 -->
-                <div class="control-unit">
-                    <span class="status"></span>
-                    <h4>5#机组</h4>
-                    <button>机组启用</button>
-                    <button>机组停用</button>
-                </div>
-            </div>
-
-            <div class="footer">
-                <div class="footer">
-                    <button>上一页</button>
-                    <button>主页面</button>
-                </div>
-
-            </div>
+        <div class="settings-section">
+          <div class="settings-title">1#2#3#</div>
+          <div class="button-grid">
+            <button class="setting-btn" id="set-alarm-123">后端报警压力设置</button>
+            <button class="setting-btn" id="set-resume-123">后端恢复压力设置</button>
+          </div>
         </div>
+
+        <!-- 4#5#机组报警参数 -->
+        <div class="param-section">
+          <h3 class="section-title">4#5#压力报警参数</h3>
+          <div class="param-row">
+            <span>后端报警压力: <span id="backendAlarmPressure45" class="param-value">7.9</span><span class="unit-label">MPa</span></span>
+            <span>后端恢复压力: <span id="backendRecoveryPressure45" class="param-value">4.7</span><span class="unit-label">MPa</span></span>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <div class="settings-title">4#5#</div>
+          <div class="button-grid">
+            <button class="setting-btn" id="set-alarm-45">后端报警压力设置</button>
+            <button class="setting-btn" id="set-resume-45">后端恢复压力设置</button>
+          </div>
+        </div>
+
+        <!-- 气举1#2#报警参数 -->
+        <div class="param-section">
+          <h3 class="section-title">气举1#2#压力报警参数</h3>
+          <div class="param-row">
+            <span>1#后端报警压力: <span id="gaslift1BackendAlarmPressure" class="param-value">9.1</span><span class="unit-label">MPa</span></span>
+            <span>1#后端恢复压力: <span id="gaslift1BackendRecoveryPressure" class="param-value">5.0</span><span class="unit-label">MPa</span></span>
+          </div>
+          <div class="param-row">
+            <span>2#后端报警压力: <span id="gaslift2BackendAlarmPressure" class="param-value">8.8</span><span class="unit-label">MPa</span></span>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <div class="settings-title">气举1#2#</div>
+          <div class="button-grid">
+            <button class="setting-btn" id="set-alarm-gaslift1">1#报警压力设置</button>
+            <button class="setting-btn" id="set-resume-gaslift1">1#恢复压力设置</button>
+            <button class="setting-btn" id="set-alarm-gaslift2">2#报警压力设置</button>
+          </div>
+        </div>
+
+
+      </div>
     </div>
+
+    <!-- 右侧：增压外输启停控制 -->
+    <div class="panel">
+      <div class="panel-header">
+        <i class="fas fa-plug icon-alarm"></i>
+        增压外输启停控制
+      </div>
+
+      <div class="control-grid">
+        <!-- 1#机组 -->
+        <div class="control-unit">
+          <div class="unit-title">
+            <span class="status-indicator status-on" id="unit1-status"></span>
+            1#机组
+          </div>
+          <div class="control-buttons">
+            <button class="control-btn start-btn" id="unit1-start">机组启用</button>
+            <button class="control-btn stop-btn" id="unit1-stop">机组停用</button>
+          </div>
+        </div>
+
+        <!-- 2#机组 -->
+        <div class="control-unit">
+          <div class="unit-title">
+            <span class="status-indicator status-off" id="unit2-status"></span>
+            2#机组
+          </div>
+          <div class="control-buttons">
+            <button class="control-btn start-btn" id="unit2-start">机组启用</button>
+            <button class="control-btn stop-btn" id="unit2-stop">机组停用</button>
+          </div>
+        </div>
+
+        <!-- 3#机组 -->
+        <div class="control-unit">
+          <div class="unit-title">
+            <span class="status-indicator status-on" id="unit3-status"></span>
+            3#机组
+          </div>
+          <div class="control-buttons">
+            <button class="control-btn start-btn" id="unit3-start">机组启用</button>
+            <button class="control-btn stop-btn" id="unit3-stop">机组停用</button>
+          </div>
+        </div>
+
+        <!-- 4#机组 -->
+        <div class="control-unit">
+          <div class="unit-title">
+            <span class="status-indicator status-on" id="unit4-status"></span>
+            4#机组
+          </div>
+          <div class="control-buttons">
+            <button class="control-btn start-btn" id="unit4-start">机组启用</button>
+            <button class="control-btn stop-btn" id="unit4-stop">机组停用</button>
+          </div>
+        </div>
+
+        <!-- 5#机组 -->
+        <div class="control-unit">
+          <div class="unit-title">
+            <span class="status-indicator status-off" id="unit5-status"></span>
+            5#机组
+          </div>
+          <div class="control-buttons">
+            <button class="control-btn start-btn" id="unit5-start">机组启用</button>
+            <button class="control-btn stop-btn" id="unit5-stop">机组停用</button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部导航按钮 -->
+  <div class="footer">
+    <button class="footer-btn" id="prev-page" onclick="toPage2()">上一页</button>
+    <button class="footer-btn" id="main-page" onclick="toPage1()">主页面</button>
+  </div>
 </div>
+
+<script src="../js/Page3.js"></script>
 </body>
 </html>

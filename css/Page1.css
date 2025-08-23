@@ -28,9 +28,9 @@ body {
   grid-column: 1 / span 3;
   text-align: center;
   padding: 12px 0;
-  background: #1a2980; /* 深蓝色背景 */
+  background: #3684ec; /* 深蓝色背景 */
   border-radius: 10px;
-  border: 1px solid #1a2980;
+  border: 1px solid #3684ec;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -162,9 +162,9 @@ body {
 .flow-btn {
   padding: 10px 25px;
   font-size: 1.1rem;
-  background: #1a2980; /* 蓝色按钮 */
+  background: #3684ec; /* 蓝色按钮 */
   color: white;
-  border: 1px solid #1a2980;
+  border: 1px solid #3684ec;
   border-radius: 6px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -173,7 +173,7 @@ body {
 }
 
 .flow-btn:hover {
-  background: #0d1a5f;
+  background: #3684ec;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
@@ -224,7 +224,7 @@ body {
   letter-spacing: 1px;
   padding: 8px 0;
   margin-bottom: 10px;
-  background: #1a2980;
+  background: #3684ec;
   color: white;
   border-radius: 6px;
 }
