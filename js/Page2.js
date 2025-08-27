@@ -28,6 +28,17 @@ function updateTime() {
   document.getElementById('currentTime').textContent = timeStr;
 }
 
+// 用户登陆验证
+async function loginCheck(){
+  const response = await fetch("http://localhost:8080/user/islogin", {
+    method: 'GET',
+    credentials: 'include'
+  });
+  if (!response.ok) {
+    window.location.href = 'Page_login.html';
+  }
+}
+
 async function refreshAllParameters() {
   try {
     // 使用正确的URL获取数据
@@ -107,7 +118,7 @@ async function fetchData(url) {
   try {
     const response = await fetch(url, {
       method: 'GET',
-      headers: {'Content-Type': 'application/json'}
+      credentials: 'include'
     });
 
     if (!response.ok) {
@@ -176,9 +187,8 @@ async function updateRequest(dataType, dataValue, dataPlace) {
 
     const response = await fetch(url, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      credentials: 'include',
+      headers: {'Content-Type': 'application/json'},
       body: requestBody
     });
 
@@ -360,7 +370,7 @@ function createParameterInputModal(unitId, paramType, paramName) {
   // 添加按钮事件
   confirmButton.onclick = function() {
     const value = parseFloat(input.value);
-    if (!isNaN(value)) {
+    if (!isNaN(value) && value % 1 === 0) {
       // 根据参数类型更新对应变量
       // 确定更新数据的类型-全部为short
       datatype = "short"
@@ -383,6 +393,8 @@ function createParameterInputModal(unitId, paramType, paramName) {
 
       // 立即刷新显示
       refreshAllParameters();
+    } else {
+      alert("请输入有效的数值（必须为不小于0的整数）");
     }
     document.body.removeChild(modal);
   };
@@ -440,6 +452,10 @@ function handleSettingButtonClick() {
 
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', () => {
+  //检查用户是否登陆 若没有则返回登陆页面
+  loginCheck()
+  setInterval(loginCheck, REFRESH_INTERVAL);
+
   // 设置初始时间
   updateTime();
 

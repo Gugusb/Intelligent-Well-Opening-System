@@ -61,6 +61,17 @@ function toPage4() {
   // window.open('Page2.html', '_blank');
 }
 
+// 用户登陆验证
+async function loginCheck(){
+  const response = await fetch("http://localhost:8080/user/islogin", {
+    method: 'GET',
+    credentials: 'include'
+  });
+  if (!response.ok) {
+    window.location.href = 'Page_login.html';
+  }
+}
+
 // 更新指定ID的元素值
 function updateElement(id, value) {
   const element = document.getElementById(id);
@@ -215,9 +226,7 @@ async function fetchData() {
   try {
     const response = await fetch(url, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
+      credentials: 'include'
     });
 
     if (!response.ok) {
@@ -258,6 +267,10 @@ async function updateAllData() {
 
 // 初始化应用
 function initApp() {
+  //检查用户是否登陆 若没有则返回登陆页面
+  loginCheck()
+  setInterval(loginCheck, 5000);
+
   // 设置初始时间
   updateTime();
 
@@ -269,9 +282,6 @@ function initApp() {
 
   // 立即获取并显示数据
   updateAllData();
-
-  // 设置按钮事件
-  setupButtonEvents();
 
   // 初始化所有数据值为0
   Object.values(ids).forEach(id => {

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API测试页面 - 跨域认证修复版</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-color: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 30px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid #eee;
+    }
+    .section {
+      margin-bottom: 30px;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      border-left: 4px solid #3498db;
+    }
+    .section h2 {
+      color: #3498db;
+      margin-bottom: 15px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #555;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: #3498db;
+      outline: none;
+      box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 4px;
+      background-color: #f8f9fa;
+      border-left: 4px solid #2ecc71;
+      overflow-x: auto;
+    }
+    .error {
+      border-left-color: #e74c3c;
+      background-color: #fdeded;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .status {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 3px;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+    .status.success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+    .status.error {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+    .status.warning {
+      background-color: #fff3cd;
+      color: #856404;
+    }
+    .debug-info {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #e9ecef;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>API 测试页面 - 跨域认证修复版</h1>
+
+  <div class="section">
+    <h2>跨域认证说明</h2>
+    <p>此页面解决了跨域请求中的认证问题：</p>
+    <ul>
+      <li>所有请求都设置了 <code>credentials: 'include'</code> 确保发送 Cookie</li>
+      <li>添加了详细的调试信息帮助排查问题</li>
+      <li>支持查看当前 Session ID</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>1. 用户登录</h2>
+    <div class="form-group">
+      <label for="username">用户名:</label>
+      <input type="text" id="username" placeholder="请输入用户名">
+    </div>
+    <div class="form-group">
+      <label for="password">密码:</label>
+      <input type="password" id="password" placeholder="请输入密码">
+    </div>
+    <button onclick="login()">登录</button>
+    <div id="loginResult" class="result"></div>
+  </div>
+
+  <div class="section">
+    <h2>2. 获取用户信息</h2>
+    <div class="form-group">
+      <label for="userId">用户ID:</label>
+      <input type="text" id="userId" placeholder="请输入用户ID">
+    </div>
+    <button onclick="getUser()">获取用户信息</button>
+    <div id="userResult" class="result"></div>
+  </div>
+
+  <div class="section">
+    <h2>3. 调试信息</h2>
+    <button onclick="checkSession()">检查当前会话</button>
+    <div id="debugInfo" class="result"></div>
+  </div>
+</div>
+
+<script>
+  // 基础URL - 根据您的实际后端地址修改
+  const BASE_URL = 'http://localhost:8080';
+
+  // 存储当前会话ID
+  let currentSessionId = null;
+
+  // 登录函数
+  async function login() {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const resultDiv = document.getElementById('loginResult');
+
+    if (!username || !password) {
+      resultDiv.innerHTML = '<div class="status error">错误: 请输入用户名和密码</div>';
+      return;
+    }
+
+    try {
+      resultDiv.innerHTML = '<div class="status">登录请求中...</div>';
+
+      const response = await fetch(`${BASE_URL}/user/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // 关键：确保发送Cookie
+        body: JSON.stringify({
+          userName: username,
+          password: password
+        })
+      });
+
+      // 尝试从响应头中获取Session ID
+      const sessionId = getSessionIdFromResponse(response);
+      console.log("sessionid:" + sessionId)
+      if (sessionId) {
+        currentSessionId = sessionId;
+
+      }
+
+      const data = await response.json();
+
+      if (response.ok) {
+        resultDiv.innerHTML = `
+                        <div class="status success">登录成功!</div>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                        <div class="debug-info">
+                            <strong>会话ID:</strong> ${sessionId || '未获取到'}
+                        </div>
+                    `;
+      } else {
+        resultDiv.innerHTML = `
+                        <div class="status error">登录失败: ${data.message || '未知错误'}</div>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                        <div class="debug-info">
+                            <strong>状态码:</strong> ${response.status}<br>
+                            <strong>会话ID:</strong> ${sessionId || '未获取到'}
+                        </div>
+                    `;
+      }
+    } catch (error) {
+      resultDiv.innerHTML = `
+                    <div class="status error">请求错误: ${error.message}</div>
+                    <div class="debug-info">
+                        <strong>错误详情:</strong> ${error}
+                    </div>
+                `;
+    }
+  }
+
+  // 获取用户信息函数
+  async function getUser() {
+    const userId = document.getElementById('userId').value;
+    const resultDiv = document.getElementById('userResult');
+
+    if (!userId) {
+      resultDiv.innerHTML = '<div class="status error">错误: 请输入用户ID</div>';
+      return;
+    }
+
+    try {
+      resultDiv.innerHTML = '<div class="status">获取用户信息中...</div>';
+
+      const response = await fetch(`${BASE_URL}/page1/getlastdata`, {
+        method: 'GET',
+        credentials: 'include' // 关键：确保发送Cookie
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        resultDiv.innerHTML = `
+                        <div class="status success">获取成功!</div>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                    `;
+      } else {
+        resultDiv.innerHTML = `
+                        <div class="status error">获取失败: ${data.message || '未知错误'}</div>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                        <div class="debug-info">
+                            <strong>状态码:</strong> ${response.status}<br>
+                            <strong>可能原因:</strong> 未登录或会话过期
+                        </div>
+                    `;
+      }
+    } catch (error) {
+      resultDiv.innerHTML = `
+                    <div class="status error">请求错误: ${error.message}</div>
+                    <div class="debug-info">
+                        <strong>错误详情:</strong> ${error}
+                    </div>
+                `;
+    }
+  }
+
+  // 检查当前会话
+  async function checkSession() {
+    const debugDiv = document.getElementById('debugInfo');
+    debugDiv.innerHTML = '<div class="status">检查会话中...</div>';
+
+    try {
+      // 尝试获取会话信息
+      const response = await fetch(`${BASE_URL}/user/checkSession`, {
+        method: 'GET',
+        credentials: 'include'
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        debugDiv.innerHTML = `
+                        <div class="status success">会话有效!</div>
+                        <pre>${JSON.stringify(data, null, 2)}</pre>
+                        <div class="debug-info">
+                            <strong>当前会话ID:</strong> ${currentSessionId || '未知'}
+                        </div>
+                    `;
+      } else {
+        debugDiv.innerHTML = `
+                        <div class="status error">会话无效或未登录</div>
+                        <div class="debug-info">
+                            <strong>状态码:</strong> ${response.status}<br>
+                            <strong>当前会话ID:</strong> ${currentSessionId || '未知'}
+                        </div>
+                    `;
+      }
+    } catch (error) {
+      debugDiv.innerHTML = `
+                    <div class="status error">检查会话失败: ${error.message}</div>
+                    <div class="debug-info">
+                        <strong>错误详情:</strong> ${error}
+                    </div>
+                `;
+    }
+  }
+
+  // 从响应头中提取Session ID
+  function getSessionIdFromResponse(response) {
+    console.log("response:" + response)
+    const cookies = response.headers.get('Set-Cookie');
+    console.log("cookie:" + cookies)
+    if (!cookies) return null;
+
+    // 尝试从Set-Cookie头中提取JSESSIONID
+    const sessionIdMatch = cookies.match(/JSESSIONID=([^;]+)/);
+    if (sessionIdMatch && sessionIdMatch[1]) {
+      return sessionIdMatch[1];
+    }
+
+    return null;
+  }
+</script>
+</body>
+</html>

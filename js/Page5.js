@@ -37,9 +37,8 @@ async function updateRequest(dataType, dataValue, dataPlace) {
 
     const response = await fetch(url, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      credentials: 'include',
+      headers: {'Content-Type': 'application/json'},
       body: requestBody
     });
 
@@ -80,6 +79,17 @@ async function updateRequest(dataType, dataValue, dataPlace) {
   } finally {
     // 无论成功或失败，都隐藏加载指示器
     hideLoadingIndicator();
+  }
+}
+
+// 用户登陆验证
+async function loginCheck(){
+  const response = await fetch("http://localhost:8080/user/islogin", {
+    method: 'GET',
+    credentials: 'include'
+  });
+  if (!response.ok) {
+    window.location.href = 'Page_login.html';
   }
 }
 
@@ -142,7 +152,9 @@ function hideLoadingIndicator() {
 }
 // 初始化页面
 document.addEventListener('DOMContentLoaded', () => {
-
+  //检查用户是否登陆 若没有则返回登陆页面
+  loginCheck()
+  setInterval(loginCheck, 5000);
 });
 
 // 加药参数状态管理对象
@@ -181,7 +193,7 @@ const DosingParamsState = {
     try {
       const response = await fetch('http://localhost:8080/page5/getlastdata', {
         method: 'GET',
-        headers: {'Content-Type': 'application/json'}
+        credentials: 'include'
       });
 
       if (!response.ok) {
@@ -396,7 +408,7 @@ const DosingParamsState = {
               }
               updateRequest(datatype, datavalue, place);
             } else {
-              alert("请输入有效的数值");
+              alert("请输入有效的数值（必须为不小于0的整数）");
             }
           }
         }
@@ -475,6 +487,7 @@ const DosingParamsState = {
 document.addEventListener('DOMContentLoaded', () => {
   // 添加数据更新动画样式
   const style = document.createElement('style');
+
   style.textContent = `
     .data-update-effect {
       animation: pulse 1s ease-in-out;
@@ -496,6 +509,7 @@ document.addEventListener('DOMContentLoaded', () => {
       100% { background-color: transparent; }
     }
   `;
+
   document.head.appendChild(style);
 
   // 初始化应用

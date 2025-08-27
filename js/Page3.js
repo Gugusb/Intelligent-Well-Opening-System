@@ -37,9 +37,8 @@ async function updateRequest(dataType, dataValue, dataPlace) {
 
     const response = await fetch(url, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      credentials: 'include',
+      headers: {'Content-Type': 'application/json'},
       body: requestBody
     });
 
@@ -80,6 +79,17 @@ async function updateRequest(dataType, dataValue, dataPlace) {
   } finally {
     // 无论成功或失败，都隐藏加载指示器
     hideLoadingIndicator();
+  }
+}
+
+// 用户登陆验证
+async function loginCheck(){
+  const response = await fetch("http://localhost:8080/user/islogin", {
+    method: 'GET',
+    credentials: 'include'
+  });
+  if (!response.ok) {
+    window.location.href = 'Page_login.html';
   }
 }
 
@@ -177,7 +187,7 @@ const AppState = {
     try {
       const response = await fetch('http://localhost:8080/page3/getlastdata', {
         method: 'GET',
-        headers: {'Content-Type': 'application/json'}
+        credentials: 'include'
       });
 
       if (!response.ok) {
@@ -347,7 +357,7 @@ const AppState = {
     if (newValue !== null && newValue !== "") {
       const numValue = parseFloat(newValue);
 
-      if (!isNaN(numValue) && numValue >= 0) {
+      if (!isNaN(numValue) && numValue >= 0 && numValue % 1 === 0) {
         this.pressureParams[paramKey] = numValue;
         //发送数据更新请求
         datatype = "short"
@@ -364,13 +374,8 @@ const AppState = {
         }
 
         updateRequest(datatype, datavalue, place)
-
-        // //本地更新数据
-        // this.updatePressureDisplays();
-        // // 添加视觉反馈
-        // this.showValueChangeEffect(paramKey);
       } else {
-        alert("请输入有效的数值");
+        alert("请输入有效的数值（必须为不小于0的整数）");
       }
     }
   },
@@ -465,6 +470,10 @@ const AppState = {
 // 当DOM加载完成后初始化应用
 window.addEventListener('DOMContentLoaded', () => {
   AppState.init();
+
+  //检查用户是否登陆 若没有则返回登陆页面
+  loginCheck()
+  setInterval(loginCheck, 5000);
 
   // 添加数据更新动画样式
   const style = document.createElement('style');
