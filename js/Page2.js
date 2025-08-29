@@ -28,6 +28,94 @@ function updateTime() {
   document.getElementById('currentTime').textContent = timeStr;
 }
 
+// 创建浮窗通知函数
+function showNotification(message) {
+  // 创建浮窗元素
+  const notification = document.createElement('div');
+  notification.className = 'notification';
+  notification.innerHTML = `<div class="notification-content">${message}</div>`;
+
+  // 添加到body
+  document.body.appendChild(notification);
+
+  // 添加样式
+  const style = document.createElement('style');
+  style.textContent = `
+                .notification {
+                    position: fixed;
+                    top: 20px;
+                    left: 50%;
+                    transform: translateX(-50%) translateY(-100px);
+                    background: white;
+                    color: #2c3e50;
+                    padding: 15px 25px;
+                    border-radius: 10px;
+                    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+                    z-index: 1000;
+                    opacity: 0;
+                    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                    display: flex;
+                    align-items: center;
+                    max-width: 90%;
+                    width: auto;
+                    min-width: 300px;
+                }
+
+                .notification.show {
+                    opacity: 1;
+                    transform: translateX(-50%) translateY(0);
+                }
+
+                .notification-content {
+                    font-size: 16px;
+                    font-weight: 500;
+                    display: flex;
+                    align-items: center;
+                }
+
+                .notification-content::before {
+                    content: '✓';
+                    display: inline-block;
+                    background: #2ecc71;
+                    color: white;
+                    width: 24px;
+                    height: 24px;
+                    border-radius: 50%;
+                    text-align: center;
+                    line-height: 24px;
+                    margin-right: 12px;
+                    font-weight: bold;
+                }
+
+                @media (max-width: 600px) {
+                    .notification {
+                        min-width: 250px;
+                        padding: 12px 20px;
+                    }
+
+                    .notification-content {
+                        font-size: 14px;
+                    }
+                }
+            `;
+  document.head.appendChild(style);
+
+  // 显示通知
+  setTimeout(() => {
+    notification.classList.add('show');
+  }, 10);
+
+  // 3秒后移除通知
+  setTimeout(() => {
+    notification.classList.remove('show');
+    // 动画结束后移除元素
+    setTimeout(() => {
+      document.body.removeChild(notification);
+      document.head.removeChild(style);
+    }, 300);
+  }, 3000);
+}
+
 // 用户登陆验证
 async function loginCheck(){
   const response = await fetch("http://localhost:8080/user/islogin", {
@@ -205,8 +293,7 @@ async function updateRequest(dataType, dataValue, dataPlace) {
     // 检查业务状态码
     if (result.code === 200) {
       // 成功弹出确认信息
-      alert(`✅ 信息更新成功，页面数据显示可能有30秒的延迟`);
-
+      showNotification('信息更新成功，页面数据显示可能有30秒的延迟');
       // 如果需要，返回更新后的数据
       return result.data;
     } else {
@@ -218,7 +305,7 @@ async function updateRequest(dataType, dataValue, dataPlace) {
     console.error('更新错误:', error);
 
     // 弹出错误信息
-    alert(
+    showNotification(
       `❌ 信息更新失败！\n\n` +
       `错误原因: ${error.message}\n\n` +
       `请检查网络或联系管理员`
@@ -394,7 +481,7 @@ function createParameterInputModal(unitId, paramType, paramName) {
       // 立即刷新显示
       refreshAllParameters();
     } else {
-      alert("请输入有效的数值（必须为不小于0的整数）");
+      showNotification("请输入有效的数值（必须为不小于0的整数）");
     }
     document.body.removeChild(modal);
   };
