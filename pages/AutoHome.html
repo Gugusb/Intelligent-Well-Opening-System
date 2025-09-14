@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一键智能开井系统测试</title>
+  <link rel="stylesheet" href="../css/AutoHome.css">
+</head>
+<body>
+<div class="container">
+  <h1>一键智能开井系统测试</h1>
+
+  <div class="main-content">
+    <button id="testButton" class="primary-button">
+      <span class="button-icon">⚡</span>
+      开井测试
+    </button>
+
+
+
+    <div class="device-status-container">
+      <h2>设备状态</h2>
+      <div id="deviceStatus" class="device-status">
+        <div class="status-item"><span class="device-name">设备A:</span> <span class="status normal">正常</span></div>
+        <div class="status-item"><span class="device-name">设备B:</span> <span class="status normal">正常</span></div>
+        <div class="status-item"><span class="device-name">设备C:</span> <span class="status normal">正常</span></div>
+        <div class="status-item"><span class="device-name">设备D:</span> <span class="status normal">正常</span></div>
+        <div class="status-item"><span class="device-name">设备E:</span> <span class="status normal">正常</span></div>
+        <div class="status-item"><span class="device-name">设备F:</span> <span class="status normal">正常</span></div>
+        <div class="status-item"><span class="device-name">设备G:</span> <span class="status normal">正常</span></div>
+        <div class="status-item"><span class="device-name">设备H:</span> <span class="status normal">正常</span></div>
+        <div class="status-item"><span class="device-name">设备I:</span> <span class="status normal">正常</span></div>
+        <div class="status-item"><span class="device-name">设备J:</span> <span class="status normal">正常</span></div>
+        <div class="status-item"><span class="device-name">设备K:</span> <span class="status normal">正常</span></div>
+        <div class="status-item"><span class="device-name">设备L:</span> <span class="status normal">正常</span></div>
+        <div class="status-item"><span class="device-name">设备M:</span> <span class="status normal">正常</span></div>
+    </div>
+  </div>
+
+  <div id="testResult" class="test-result">
+    <span class="result-label">测试结果:</span>
+    <span class="result-value testing">测试中</span>
+  </div>
+
+  <div class="control-buttons">
+    <button id="smartControl" class="control-button" onclick="toPageAutoCraft()">
+      <span class="button-icon">🧠</span>
+      智能控制
+    </button>
+    <button id="manualControl" class="control-button" onclick="toPage1()">
+      <span class="button-icon">👋</span>
+      手动控制
+    </button>
+  </div>
+</div>
+</div>
+
+<script src="../js/AutoHome.js"></script>
+</body>
+</html>
