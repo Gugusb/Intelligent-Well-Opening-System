@@ -8,28 +8,52 @@
   <link rel="stylesheet" href="../css/AutoCraft.css">
 </head>
 <body>
-<!-- 修改1：主标题居中 -->
 <h1>智能泡排-气举-抽吸系统监控</h1>
 
 <div class="container">
   <!-- 左侧：气井生产情况 -->
   <div class="left-panel">
     <div class="card">
+        <div class="control-buttons">
+          <button class="ctrl-btn up" onclick="toAutoHome()">上一页</button>
+          <button class="ctrl-btn down" onclick="editParam()">编辑气井参数</button>
+          <button class="ctrl-btn down" onclick="printData()">导出生产数据</button>
+          <button class="ctrl-btn down" onclick="stopAll()">关停全部工艺</button>
+          <button class="ctrl-btn down" onclick="editCraft()">编辑工艺参数</button>
+        </div>
+    </div>
+
+    <div class="card">
       <h2>生产工艺状态</h2>
       <div class="process-indicators">
         <div class="indicator">
           <span class="status-dot green"></span>
-          <span>抽吸混输</span>
+          <span>【抽吸混输】机组1</span>
           <span class="status-badge active">运行中</span>
         </div>
         <div class="indicator">
           <span class="status-dot red"></span>
-          <span>泡排工艺</span>
+          <span>【抽吸混输】机组2</span>
           <span class="status-badge inactive">未开启</span>
         </div>
         <div class="indicator">
           <span class="status-dot green"></span>
-          <span>气举工艺</span>
+          <span>【抽吸混输】机组3</span>
+          <span class="status-badge active">运行中</span>
+        </div>
+        <div class="indicator">
+          <span class="status-dot green"></span>
+          <span>【抽吸混输】机组4</span>
+          <span class="status-badge active">运行中</span>
+        </div>
+        <div class="indicator">
+          <span class="status-dot green"></span>
+          <span>【气举工艺】机组5</span>
+          <span class="status-badge active">运行中</span>
+        </div>
+        <div class="indicator">
+          <span class="status-dot green"></span>
+          <span>【气举工艺】机组6</span>
           <span class="status-badge active">运行中</span>
         </div>
       </div>
@@ -83,139 +107,248 @@
         <div class="log-entry">
           <span class="log-time">[2025/9/1/18:20]</span>
           <span>检测到液位上升，启动自动排水。</span>
-      </div>
-      <div class="log-entry">
-        <span class="log-time">[2025/9/1/17:55]</span>
-        <span>气举工艺效率提升5%。</span>
+        </div>
+        <div class="log-entry">
+          <span class="log-time">[2025/9/1/17:55]</span>
+          <span>气举工艺效率提升5%。</span>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- 右侧：工艺详情 -->
-<div class="right-panel">
-  <!-- 抽吸混输工艺 -->
-  <div class="card process-card">
-    <div class="process-header">
-      <!-- 修改2：状态标签靠近标题 -->
-      <div class="process-title-container">
-        <h3>抽吸混输工艺</h3>
-        <span class="status-badge active">运行中...</span>
+  <!-- 右侧：工艺详情 -->
+  <div class="right-panel">
+    <!-- 抽吸混输工艺 -->
+    <div class="card process-card">
+      <div class="process-header">
+        <div class="process-title-container">
+          <h3>抽吸混输工艺</h3>
+          <span class="status-badge active" data-process="suction">运行中...</span>
+        </div>
+<!--        <button class="edit-btn" data-process="suction">-->
+<!--          <i class="material-icons">edit</i>-->
+<!--        </button>-->
       </div>
-      <button class="edit-btn" data-process="suction">
-        <i class="material-icons">edit</i>
-      </button>
-    </div>
-    <div class="process-content">
-      <h4>工艺参数</h4>
-      <div class="param-item">
-        <span>最大负压:</span>
-          <span id="suction-negative-pressure">0.09MPa</span>
-      </div>
-      <div class="param-item">
-        <span>机器功率:</span>
-        <span id="suction-power">10e4W</span>
-      </div>
-      <div class="param-item">
-        <span>启用机器:</span>
-        <span id="suction-machines">4台</span>
-      </div>
+      <div class="process-content">
+        <h4>工艺参数</h4>
+        <div class="params-grid">
+          <!-- 启动条件板块 -->
+          <div class="params-column condition-column">
+            <h6>启动条件</h6>
+            <div class="param-item">
+              <span>井口油压:</span>
+              <span id="suction-wellhead-pressure">0.2MPa</span>
+            </div>
+          </div>
 
-      <h4>运行状态</h4>
+          <!-- 分隔竖线 -->
+          <div class="params-divider"></div>
+
+          <!-- 智能计算板块 -->
+          <div class="params-column">
+            <h6>智能计算</h6>
+            <div class="param-item">
+              <span>机器数量:</span>
+              <span id="suction-machines">4台</span>
+            </div>
+            <div class="param-item">
+              <span>抽吸功率:</span>
+              <span id="suction-power">10e4W</span>
+            </div>
+          </div>
+
+          <!-- 分隔竖线 -->
+          <div class="params-divider"></div>
+
+          <!-- 默认参数板块 -->
+          <div class="params-column">
+            <h6>默认参数</h6>
+            <div class="param-item">
+              <span>机器数量:</span>
+              <span id="suction-default-machines">4台</span>
+            </div>
+          </div>
+        </div>
+
+        <h4>运行状态</h4>
         <div class="progress-container">
           <div class="progress-bar">
             <div class="progress-fill" id="suction-progress" style="width: 35%;"></div>
           </div>
           <span class="progress-text" id="suction-time">3天16小时38分钟 / 10天</span>
         </div>
+      </div>
     </div>
-  </div>
 
-  <!-- 泡排工艺 -->
-  <div class="card process-card">
-    <div class="process-header">
-      <!-- 修改2：状态标签靠近标题 -->
-      <div class="process-title-container">
-        <h3>泡排工艺</h3>
-        <span class="status-badge inactive">未开启</span>
-      </div>
-      <button class="edit-btn" data-process="foam">
-        <i class="material-icons">edit</i>
-      </button>
-    </div>
-    <div class="process-content">
-      <h4>工艺参数</h4>
-      <div class="param-item">
-        <span>稀释比:</span>
-        <span id="foam-dilution">12.5%</span>
-      </div>
-      <div class="param-item">
-        <span>加药浓度:</span>
-        <span id="foam-concentration">***</span>
-      </div>
-      <div class="param-item">
-        <span>泵药速度:</span>
-        <span id="foam-pump-speed">10L/h</span>
-      </div>
-      <div class="param-item">
-        <span>加药压力:</span>
-        <span id="foam-pressure">3MPa</span>
-      </div>
-
-      <h4>运行状态</h4>
-      <div class="progress-container">
-        <div class="progress-bar">
-          <div class="progress-fill" id="foam-progress" style="width: 0%;"></div>
+    <!-- 泡排工艺 -->
+    <div class="card process-card">
+      <div class="process-header">
+        <div class="process-title-container">
+          <h3>泡排工艺</h3>
+          <span class="status-badge inactive" data-process="foam">未开启</span>
         </div>
-        <span class="progress-text" id="foam-time">0小时 / 0小时</span>
+<!--        <button class="edit-btn" data-process="foam">-->
+<!--          <i class="material-icons">edit</i>-->
+<!--        </button>-->
       </div>
-      <div class="param-item">
-        <span>已注液量:</span>
-        <span id="foam-injected">0m³ / 0m³</span>
-      </div>
-    </div>
-  </div>
+      <div class="process-content">
+        <h4>工艺参数</h4>
+        <div class="params-grid">
+          <!-- 启动条件板块 -->
+          <div class="params-column condition-column">
+            <h6>启动条件</h6>
+            <div class="param-item">
+              <span>启动压差:</span>
+              <span id="foam-pressure-diff">5MPa</span>
+            </div>
+          </div>
 
-  <!-- 气举工艺 -->
-  <div class="card process-card">
-    <div class="process-header">
-      <!-- 修改2：状态标签靠近标题 -->
-      <div class="process-title-container">
-        <h3>气举工艺</h3>
-        <span class="status-badge active">运行中...</span>
-      </div>
-      <button class="edit-btn" data-process="gas-lift">
-        <i class="material-icons">edit</i>
-      </button>
-    </div>
-    <div class="process-content">
-      <h4>工艺参数</h4>
-      <div class="param-item">
-        <span>注气速度:</span>
-        <span id="gas-lift-rate">100m³/h</span>
-      </div>
-      <div class="param-item">
-        <span>注气压力:</span>
-        <span id="gas-lift-pressure">20MPa</span>
-      </div>
-      <div class="param-item">
-        <span>气举设备:</span>
-        <span id="gas-lift-devices">2台</span>
-      </div>
+          <!-- 分隔竖线 -->
+          <div class="params-divider"></div>
 
-      <h4>运行状态</h4>
-      <div class="progress-container">
-        <div class="progress-bar">
-          <div class="progress-fill" id="gas-lift-progress" style="width: 77%;"></div>
+          <!-- 智能计算板块 -->
+          <div class="params-column">
+            <h6>智能计算</h6>
+            <div class="param-item">
+              <span>积液量:</span>
+              <span id="foam-liquid-accumulation">300m³</span>
+            </div>
+            <div class="param-item">
+              <span>加注量:</span>
+              <span id="foam-injection-volume">50L</span>
+            </div>
+            <div class="param-item">
+              <span>加药排量:</span>
+              <span id="foam-injection-rate">15L/h</span>
+            </div>
+            <div class="param-item">
+              <span>加注时间:</span>
+              <span id="foam-injection-time">1.5小时</span>
+            </div>
+          </div>
+
+          <!-- 分隔竖线 -->
+          <div class="params-divider"></div>
+
+          <!-- 默认参数板块 -->
+          <div class="params-column">
+            <h6>默认参数</h6>
+            <div class="param-item">
+              <span>加药排量:</span>
+              <span id="foam-default-rate">15L/h</span>
+            </div>
+            <div class="param-item">
+              <span>加注时间:</span>
+              <span id="foam-default-time">1.5小时</span>
+            </div>
+            <div class="param-item">
+              <span>泡排剂浓度:</span>
+              <span id="foam-default-ppjnd">0.05</span>
+            </div>
+            <div class="param-item">
+              <span>泡排剂用量:</span>
+              <span id="foam-default-ppjyl">0.2</span>
+            </div>
+            <div class="param-item">
+              <span>泡排剂损耗:</span>
+              <span id="foam-default-ppjsh">0.5</span>
+            </div>
+          </div>
         </div>
-        <span class="progress-text" id="gas-lift-time">37小时 / 48小时</span>
+
+        <h4>运行状态</h4>
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="foam-progress" style="width: 0%;"></div>
+          </div>
+          <span class="progress-text" id="foam-time">0小时 / 0小时</span>
+        </div>
+<!--        <div class="param-item">-->
+<!--          <span>已注液量:</span>-->
+<!--          <span id="foam-injected">0m³ / 0m³</span>-->
+<!--        </div>-->
+      </div>
+    </div>
+
+    <!-- 气举工艺 -->
+    <div class="card process-card">
+      <div class="process-header">
+        <div class="process-title-container">
+          <h3>气举工艺</h3>
+          <span class="status-badge active" data-process="gasLift">运行中...</span>
+          <span class="status-badge inactive" id="gl-banner">已禁用</span>
+        </div>
+<!--        <button class="edit-btn" data-process="gasLift">-->
+<!--          <i class="material-icons">edit</i>-->
+<!--        </button>-->
+      </div>
+      <div class="process-content">
+        <h4>工艺参数</h4>
+        <div class="params-grid">
+          <!-- 启动条件板块 -->
+          <div class="params-column condition-column">
+            <h6>启动条件</h6>
+            <div class="param-item">
+              <span>启动压差:</span>
+              <span id="gasLift-pressure-diff">3MPa</span>
+            </div>
+          </div>
+
+          <!-- 分隔竖线 -->
+          <div class="params-divider"></div>
+
+          <!-- 智能计算板块 -->
+          <div class="params-column">
+            <h6>智能计算</h6>
+            <div class="param-item">
+              <span>注气量:</span>
+              <span id="gasLift-gas-volume">800m³</span>
+            </div>
+            <div class="param-item">
+              <span>注气排量:</span>
+              <span id="gasLift-gas-rate">35m³/h</span>
+            </div>
+            <div class="param-item">
+              <span>注气时间:</span>
+              <span id="gasLift-gas-time">3小时</span>
+            </div>
+            <div class="param-item">
+              <span>注气压力:</span>
+              <span id="gasLift-gas-pressure">2MPa</span>
+            </div>
+          </div>
+
+          <!-- 分隔竖线 -->
+          <div class="params-divider"></div>
+
+          <!-- 默认参数板块 -->
+          <div class="params-column">
+            <h6>默认参数</h6>
+            <div class="param-item">
+              <span>注气排量:</span>
+              <span id="gasLift-default-rate">35m³/h</span>
+            </div>
+            <div class="param-item">
+              <span>注气时间:</span>
+              <span id="gasLift-default-time">3小时</span>
+            </div>
+          </div>
+        </div>
+
+        <h4>运行状态</h4>
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="gasLift-progress" style="width: 77%;"></div>
+          </div>
+          <span class="progress-text" id="gasLift-time">37小时 / 48小时</span>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 
 <!-- 编辑参数的模态窗口 -->
+<!-- 替换原有的模态窗口内容 -->
 <div class="modal" id="edit-modal">
   <div class="modal-content">
     <div class="modal-header">
@@ -223,19 +356,7 @@
       <button class="close">&times;</button>
     </div>
     <div class="modal-body" id="modal-form">
-      <div class="form-group">
-        <label for="maxNegativePressure">最大负压 (MPa)</label>
-        <input type="number" step="0.01" id="maxNegativePressure" value="0.09">
-      </div>
-      <div class="form-group">
-        <label for="power">机器功率</label>
-        <input type="text" id="power" value="10e4W">
-
-      </div>
-      <div class="form-group">
-        <label for="machines">启用机器数量</label>
-        <input type="number" id="machines" value="4">
-      </div>
+      <!-- 表单内容将根据工艺类型动态生成 -->
     </div>
     <div class="modal-footer">
       <button class="modal-btn" id="cancel-btn">取消</button>
@@ -245,5 +366,6 @@
 </div>
 
 <script src="../js/AutoCraft.js"></script>
+<script src="../js/AutoCraft2.js"></script>
 </body>
 </html>

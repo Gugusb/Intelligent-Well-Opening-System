@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../Intelligent Well Opening System.iml" filepath="$PROJECT_DIR$/../Intelligent Well Opening System.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/IWOS-F.iml" filepath="$PROJECT_DIR$/.idea/IWOS-F.iml" />
     </modules>
   </component>
 </project>

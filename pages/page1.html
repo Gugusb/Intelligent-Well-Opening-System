@@ -79,13 +79,6 @@
             <span class="data-value" id="unit6StatusText">停止</span>
         </span>
       </div>
-      <div class="data-item">
-        <span>7#泡排机组运行状态：</span>
-        <span>
-            <span class="status-indicator stopped" id="unit7Status"></span>
-            <span class="data-value" id="unit7StatusText">停止</span>
-        </span>
-      </div>
     </div>
 
     <div class="monitor-block">
@@ -137,31 +130,31 @@
         <div class="flow-group">
           <div class="flow-item">
             <span>1#2#3#总瞬时流量(L/S)：</span>
-            <span class="flow-value">0<span class="unit">L/S</span></span>
+            <span class="flow-value" id="totalInstantFlow123">0<span class="unit">L/S</span></span>
           </div>
           <div class="flow-item">
             <span>1#2#3#总累计流量(m³)：</span>
-            <span class="flow-value">0<span class="unit">m³</span></span>
+            <span class="flow-value" if="totalAccumulatedFlow123">0<span class="unit">m³</span></span>
           </div>
         </div>
         <div class="flow-group">
           <div class="flow-item">
             <span>4#5#总瞬时流量(L/S)：</span>
-            <span class="flow-value">0<span class="unit">L/S</span></span>
+            <span class="flow-value" if="totalInstantFlow45">0<span class="unit">L/S</span></span>
           </div>
           <div class="flow-item">
             <span>4#5#总累计流量(m³)：</span>
-            <span class="flow-value">0<span class="unit">m³</span></span>
+            <span class="flow-value" id="totalAccumulatedFlow45">0<span class="unit">m³</span></span>
           </div>
         </div>
         <div class="flow-group">
           <div class="flow-item">
             <span>气举瞬时流量(L/S)：</span>
-            <span class="flow-value">0<span class="unit">L/S</span></span>
+            <span class="flow-value" id="gasliftInstantFlow">0<span class="unit">L/S</span></span>
           </div>
           <div class="flow-item">
             <span>气举累计流量(m³)：</span>
-            <span class="flow-value">0<span class="unit">m³</span></span>
+            <span class="flow-value" id="gasliftAccumulatedFlow">0<span class="unit">m³</span></span>
           </div>
         </div>
       </div>

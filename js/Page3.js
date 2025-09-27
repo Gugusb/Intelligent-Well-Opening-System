@@ -452,10 +452,10 @@ const AppState = {
         //发送数据更新请求
         datatype = "short"
         datavalue = numValue;
-        place = "gugu通道1."
+        place = "gugu通道2."
         switch(paramKey) {
-          case "resume123":place += "混输气举撬123.后端恢复压力";break;
-          case "alarm123":place += "混输气举撬123.后端报警压力";break;
+          case "resume123":place += "混输气举撬123-3.后端恢复压力";break;
+          case "alarm123":place += "混输气举撬123-3.后端报警压力";break;
           case "alarm45":place += "混输气举撬456.后端报警压力1";break;
           case "resume45":place += "混输气举撬456.后端恢复压力1";break;
           case "alarmGaslift1":place += "混输气举撬456.1#后端警报压力";break;
@@ -493,10 +493,10 @@ const AppState = {
 
   // 更新所有压力参数显示
   updatePressureDisplays() {
-    document.getElementById('backendAlarmPressure123').textContent = this.pressureParams.alarm123;
-    document.getElementById('backendRecoveryPressure123').textContent = this.pressureParams.resume123;
-    document.getElementById('backendAlarmPressure45').textContent = this.pressureParams.alarm45;
-    document.getElementById('backendRecoveryPressure45').textContent = this.pressureParams.resume45;
+    document.getElementById('backendAlarmPressure123').textContent = this.pressureParams.alarm123 / 100;
+    document.getElementById('backendRecoveryPressure123').textContent = this.pressureParams.resume123 / 100;
+    document.getElementById('backendAlarmPressure45').textContent = this.pressureParams.alarm45 / 100;
+    document.getElementById('backendRecoveryPressure45').textContent = this.pressureParams.resume45 / 100;
     document.getElementById('gaslift1BackendAlarmPressure').textContent = this.pressureParams.alarmGaslift1;
     document.getElementById('gaslift1BackendRecoveryPressure').textContent = this.pressureParams.resumeGaslift1;
     document.getElementById('gaslift2BackendAlarmPressure').textContent = this.pressureParams.alarmGaslift2;
@@ -528,7 +528,7 @@ const AppState = {
     datatype = "boolean"
     datavalue = false
     if(status === "on") datavalue = true
-    place = "gugu通道1.混输气举撬"
+    place = "gugu通道2.混输气举撬"
 
     if(unitId <= 3)place += "123." + unitId + "#机组状态1";
     else place += "456." + unitId + "#机组状态";

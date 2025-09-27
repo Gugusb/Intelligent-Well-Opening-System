@@ -344,8 +344,8 @@ const DosingParamsState = {
    */
   updateDisplay() {
     // 更新报警参数
-    document.getElementById('pressureAlarm').textContent = this.currentData.pressureAlarm;
-    document.getElementById('pressureRecovery').textContent = this.currentData.pressureRecovery;
+    document.getElementById('pressureAlarm').textContent = this.currentData.pressureAlarm / 100;
+    document.getElementById('pressureRecovery').textContent = this.currentData.pressureRecovery / 100;
     document.getElementById('lowLevelWarning').textContent = this.currentData.lowLevelWarning;
     document.getElementById('highLevelWarning').textContent = this.currentData.highLevelWarning;
     document.getElementById('lowLevelAlarm').textContent = this.currentData.lowLevelAlarm;
@@ -485,7 +485,7 @@ const DosingParamsState = {
             if (!isNaN(numValue) && numValue >= 0 && numValue % 1 === 0) {
               datatype = "short";
               datavalue = numValue;
-              place = "gugu通道1.加药."
+              place = "gugu通道2.加药."
               switch(button.id) {
                 case "btn-pa": place += "加药后端报警压力";break;
                 case "btn-pr": place += "加药后端恢复压力";break;
@@ -545,7 +545,7 @@ const DosingParamsState = {
           if (!isNaN(numValue) && numValue >= 0 && numValue <= maxValue) {
             datatype = "short";
             datavalue = numValue;
-            place = "gugu通道1.加药.时间" + timeValue + (isStartTime ? '-启动' : '-停止') + (isHourButton ? '时' : '分')
+            place = "gugu通道2.加药.时间" + timeValue + (isStartTime ? '-启动' : '-停止') + (isHourButton ? '时' : '分')
 
             updateRequest(datatype, datavalue, place);
           } else {

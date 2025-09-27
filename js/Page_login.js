@@ -63,7 +63,7 @@ async function login(username, password) {
       showMessage('登陆成功，自动跳转中', 'success');
       // 3秒后跳转到Page1.html
       setTimeout(() => {
-        window.location.href = 'Page1.html';
+        window.location.href = 'AutoHome.html';
       }, 3000);
     } else {
       showMessage('用户名或密码错误', 'error');

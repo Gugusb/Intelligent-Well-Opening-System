@@ -129,7 +129,7 @@ const DosingDataState = {
 
     // 更新压力值
     document.getElementById('dosingPressure').textContent =
-      this.currentData.dosingPressure.toFixed(1);
+      (this.currentData.dosingPressure / 100).toFixed(2);
 
     // 更新液位值
     document.getElementById('dosingLiquidLevel').textContent =
@@ -549,7 +549,7 @@ function confirmAction(unitNumber, action) {
             case '2#':datavalue = 4;
           }
       }
-      place = "gugu通道1.加药.模式"
+      place = "gugu通道2.加药.模式"
       console.log(datatype, datavalue, place)
       updateRequest(datatype, datavalue, place);
     }
@@ -569,7 +569,7 @@ function confirmAction2(unitNumber, action) {
         case '开启':datavalue = true;break;
         case '关闭':datavalue = false;
       }
-      place = "gugu通道1.加药." + unitNumber + "球阀指示"
+      place = "gugu通道2.加药." + unitNumber + "球阀指示"
       console.log(datatype, datavalue, place)
       updateRequest(datatype, datavalue, place);
     }

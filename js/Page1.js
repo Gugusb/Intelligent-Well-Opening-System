@@ -85,24 +85,24 @@ function updateAllValues(data) {
   if (!data) return;
 
   // 更新压力值
-  updateElement(ids.frontPressure1, data.frontPressure1);
-  updateElement(ids.frontPressure2, data.frontPressure2);
-  updateElement(ids.frontPressure3, data.frontPressure3);
-  updateElement(ids.frontPressure45, data.frontPressure45);
-  updateElement(ids.gasFrontPressure5, data.gasliftFrontPressure5);
-  updateElement(ids.gasFrontPressure6, data.gasliftFrontPressure6);
-  updateElement(ids.rearPressure123, data.backPressure123);
-  updateElement(ids.rearPressure45, data.backPressure45);
-  updateElement(ids.gasRearPressure6, data.gasliftBackPressure6);
+  updateElement(ids.frontPressure1, data.frontPressure1 / 100);
+  updateElement(ids.frontPressure2, data.frontPressure2 / 100);
+  updateElement(ids.frontPressure3, data.frontPressure3 / 100);
+  updateElement(ids.frontPressure45, data.frontPressure45 / 100);
+  updateElement(ids.gasFrontPressure5, data.gasliftFrontPressure5 / 100);//数据标签缺失，存疑
+  updateElement(ids.gasFrontPressure6, data.gasliftFrontPressure6 / 100);
+  updateElement(ids.rearPressure123, data.backPressure123 / 100);
+  updateElement(ids.rearPressure45, data.backPressure45 / 100);
+  updateElement(ids.gasRearPressure6, data.gasliftBackPressure6 / 100);
 
   // 更新流量计
-  updateElement(ids.instantFlow, data.flowmeterInstantFlow.toFixed(2));
-  updateElement(ids.mediumTemp, data.flowmeterMediumTemp.toFixed(1));
-  updateElement(ids.staticPressure, data.flowmeterStaticPressure.toFixed(2));
-  updateElement(ids.pressureDiff, data.flowmeterDiffPressure.toFixed(2));
+  updateElement(ids.instantFlow, data.flowmeterInstantFlow);
+  updateElement(ids.mediumTemp, data.flowmeterMediumTemp);
+  updateElement(ids.staticPressure, data.flowmeterStaticPressure);
+  updateElement(ids.pressureDiff, data.flowmeterDiffPressure);
 
   // 更新累计流量
-  updateElement(ids.totalFlow, data.flowmeterAccumulatedFlow.toFixed(2));
+  updateElement(ids.totalFlow, data.flowmeterAccumulatedFlow);
 
   // 更新启泵次数
   updateElement(ids.pump1Count, data.pump1StartCount);
@@ -122,18 +122,18 @@ function updateFlowData(data) {
   if (!data) return;
 
   const flowElements = [
-    { selector: ".flow-group:nth-child(1) .flow-item:first-child .flow-value", value: data.totalInstantFlow123 },
-    { selector: ".flow-group:nth-child(1) .flow-item:nth-child(2) .flow-value", value: data.totalAccumulatedFlow123 },
-    { selector: ".flow-group:nth-child(2) .flow-item:first-child .flow-value", value: data.totalInstantFlow45 },
-    { selector: ".flow-group:nth-child(2) .flow-item:nth-child(2) .flow-value", value: data.totalAccumulatedFlow45 },
-    { selector: ".flow-group:nth-child(3) .flow-item:first-child .flow-value", value: data.gasliftInstantFlow },
-    { selector: ".flow-group:nth-child(3) .flow-item:nth-child(2) .flow-value", value: data.gasliftAccumulatedFlow }
+    { selector: "totalInstantFlow123", value: data.totalInstantFlow123 / 10 },
+    { selector: "data.totalAccumulatedFlow123", value: data.totalAccumulatedFlow123  * 100},
+    { selector: "data.totalInstantFlow45", value: data.totalInstantFlow45  / 10},
+    { selector: "data.totalAccumulatedFlow45", value: data.totalAccumulatedFlow45 * 100 },
+    { selector: "gasliftInstantFlow", value: data.gasliftInstantFlow / 100 },
+    { selector: "gasliftAccumulatedFlow", value: data.gasliftAccumulatedFlow / 100 }
   ];
 
   flowElements.forEach(item => {
-    const element = document.querySelector(item.selector);
-    if (element) {
-      element.textContent = item.value;
+    if (item) {
+      //console.log(item.selector, item.value)
+      updateElement(item.selector, item.value)
     }
   });
 }
@@ -143,12 +143,18 @@ function updateDeviceStatusDisplay(data) {
   if (!data) return;
 
   // 更新当前模式
-  const modeText = `模式 ${data.currentMode}`;
-  document.getElementById("currentMode").textContent = modeText;
+  modeText = `模式 ${data.currentMode}`;
+  if(data.currentMode == 1){
+    modeText = `气举模式`;
+  }else{
+    modeText = `正常模式`;
+  }
 
   // 更新电气箱状态
   updateElecBoxDisplay("leftElecStatus", "leftElecText", data.leftElecBoxStatus);
   updateElecBoxDisplay("rightElecStatus", "rightElecText", data.rightElecBoxStatus);
+
+  console.log(data)
 
   // 更新机组状态
   const units = [
@@ -161,7 +167,7 @@ function updateDeviceStatusDisplay(data) {
     false // 第7个机组没有数据，默认为停止
   ];
 
-  for (let i = 1; i <= 7; i++) {
+  for (let i = 1; i <= 6; i++) {
     const status = units[i-1] ? "running" : "stopped";
     const text = units[i-1] ? "运行中" : "停止";
 
@@ -184,6 +190,12 @@ function updateDeviceStatusDisplay(data) {
 
 // 更新电气箱显示
 function updateElecBoxDisplay(statusId, textId, status) {
+  if(status == 0){
+    status = true;
+  }else{
+    status = false;
+  }
+
   const statusIndicator = document.getElementById(statusId);
   const textElement = document.getElementById(textId);
 

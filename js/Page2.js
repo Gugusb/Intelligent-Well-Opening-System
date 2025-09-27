@@ -173,8 +173,8 @@ async function refreshAllParameters() {
       const unit = parameters.units[unitId];
       document.getElementById(`unit${unitId}StartTime`).textContent = `${unit.startHr} 时 ${unit.startMin} 分`;
       document.getElementById(`unit${unitId}StopTime`).textContent = `${unit.stopHr} 时 ${unit.stopMin} 分`;
-      document.getElementById(`unit${unitId}StartPressure`).textContent = `${unit.startPressure} MPa`;
-      document.getElementById(`unit${unitId}StopPressure`).textContent = `${unit.stopPressure} MPa`;
+      document.getElementById(`unit${unitId}StartPressure`).textContent = `${unit.startPressure / 100} MPa`;
+      document.getElementById(`unit${unitId}StopPressure`).textContent = `${unit.stopPressure / 100} MPa`;
       document.getElementById(`unit${unitId}LeftValveTime`).textContent = `${unit.leftValve} S`;
       document.getElementById(`unit${unitId}RightValveTime`).textContent = `${unit.rightValve} S`;
     }
@@ -462,8 +462,8 @@ function createParameterInputModal(unitId, paramType, paramName) {
       // 确定更新数据的类型-全部为short
       datatype = "short"
       // 组装目标地址
-      place = "gugu通道1"
-      if(unitId <= 3)place += ".混输气举撬123"
+      place = "gugu通道2"
+      if(unitId <= 3)place += ".混输气举撬123-3"
       else place += ".混输气举撬456"
 
       if(unitId <= 5)place += "." + unitId + "#"
