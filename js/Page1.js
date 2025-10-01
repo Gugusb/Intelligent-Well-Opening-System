@@ -96,8 +96,8 @@ function updateAllValues(data) {
   updateElement(ids.gasRearPressure6, data.gasliftBackPressure6 / 100);
 
   // 更新流量计
-  updateElement(ids.instantFlow, data.flowmeterInstantFlow);
-  updateElement(ids.mediumTemp, data.flowmeterMediumTemp);
+  updateElement(ids.instantFlow, data.flowmeterInstantGasFlow);
+  updateElement(ids.mediumTemp, data.flowmeterInstantWaterFlow);
   updateElement(ids.staticPressure, data.flowmeterStaticPressure);
   updateElement(ids.pressureDiff, data.flowmeterDiffPressure);
 
@@ -144,7 +144,7 @@ function updateDeviceStatusDisplay(data) {
 
   // 更新当前模式
   modeText = `模式 ${data.currentMode}`;
-  if(data.currentMode == 1){
+  if(data.currentMode == false){
     modeText = `气举模式`;
   }else{
     modeText = `正常模式`;
