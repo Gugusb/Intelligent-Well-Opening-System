@@ -104,7 +104,7 @@ function initializePage() {
 
 // 新增：获取所有日志
 function fetchAllLogs() {
-  fetch('http://localhost:8080/smart/get-logs-by-id')
+  fetch('https://ggbackend.dy.takin.cc/smart/get-logs-by-id')
     .then(response => response.json())
     .then(data => {
       if (data.code === 200) {
@@ -118,7 +118,7 @@ function fetchAllLogs() {
 
 // 新增：获取最近一分钟的日志
 function fetchRecentLogs() {
-  fetch('http://localhost:8080/smart/get-rec-logs-by-id')
+  fetch('https://ggbackend.dy.takin.cc/smart/get-rec-logs-by-id')
     .then(response => response.json())
     .then(data => {
       if (data.code === 200) {
@@ -177,7 +177,7 @@ function updateLogs(logsArray, replaceAll) {
 // 新增：获取所有工艺状态的函数
 function fetchProcessStates() {
   // 获取气举工艺状态
-  fetch('http://localhost:8080/smart/get-gas-lift-state')
+  fetch('https://ggbackend.dy.takin.cc/smart/get-gas-lift-state')
     .then(response => response.json())
     .then(data => {
       if (data.code === 200) {
@@ -189,7 +189,7 @@ function fetchProcessStates() {
     });
 
   // 获取泡排工艺状态
-  fetch('http://localhost:8080/smart/get-foam-state')
+  fetch('https://ggbackend.dy.takin.cc/smart/get-foam-state')
     .then(response => response.json())
     .then(data => {
       if (data.code === 200) {
@@ -201,7 +201,7 @@ function fetchProcessStates() {
     });
 
   // 获取抽吸工艺状态
-  fetch('http://localhost:8080/smart/get-pump-state')
+  fetch('https://ggbackend.dy.takin.cc/smart/get-pump-state')
     .then(response => response.json())
     .then(data => {
       if (data.code === 200) {
@@ -342,7 +342,7 @@ function updateProcessStatusGL(processType, isEnabled, isOpen) {
 
 // 新增：定时获取机组状态和生产数据的功能
 function fetchCrewData() {
-  fetch('http://localhost:8080/smart/get-crew-snap')
+  fetch('https://ggbackend.dy.takin.cc/smart/get-crew-snap')
     .then(response => response.json())
     .then(data => {
       if (data.code === 200) {
@@ -743,7 +743,7 @@ function editParam() {
       }
 
       // 调用API
-      fetch('http://localhost:8080/smart/edit-params', {
+      fetch('https://ggbackend.dy.takin.cc/smart/edit-params', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -970,7 +970,7 @@ function printData(){
       }
 
       // 调用简化导出API
-      const url = `http://localhost:8080/printer/print-data1?startDate=${startDate}&endDate=${endDate}`;
+      const url = `https://ggbackend.dy.takin.cc/printer/print-data1?startDate=${startDate}&endDate=${endDate}`;
 
       // 创建隐藏链接进行下载
       const a = document.createElement('a');
@@ -981,7 +981,7 @@ function printData(){
       document.body.removeChild(a);
 
 //      // 调用导出API
-//      fetch('http://localhost:8080/printer/print-data', {
+//      fetch('https://ggbackend.dy.takin.cc/printer/print-data', {
 //          method: 'POST',
 //          headers: {
 //              'Content-Type': 'application/json'
@@ -1029,7 +1029,7 @@ function printData(){
       }
 
       // 调用简化导出API
-      const url = `http://localhost:8080/printer/print-data2?startDate=${startDate}&endDate=${endDate}`;
+      const url = `https://ggbackend.dy.takin.cc/printer/print-data2?startDate=${startDate}&endDate=${endDate}`;
 
       // 创建隐藏链接进行下载
       const a = document.createElement('a');
@@ -1058,7 +1058,7 @@ function printData(){
       }
 
       // 调用简化导出API
-      const url = `http://localhost:8080/printer/print-data3?startDate=${startDate}&endDate=${endDate}`;
+      const url = `https://ggbackend.dy.takin.cc/printer/print-data3?startDate=${startDate}&endDate=${endDate}`;
 
       // 创建隐藏链接进行下载
       const a = document.createElement('a');
@@ -1069,7 +1069,7 @@ function printData(){
       document.body.removeChild(a);
 
 //      // 调用导出API
-//      fetch('http://localhost:8080/printer/print-data', {
+//      fetch('https://ggbackend.dy.takin.cc/printer/print-data', {
 //          method: 'POST',
 //          headers: {
 //              'Content-Type': 'application/json'
@@ -1117,7 +1117,7 @@ function printData(){
       }
 
       // 调用简化导出API
-      const url = `http://localhost:8080/printer/print-data4?startDate=${startDate}&endDate=${endDate}`;
+      const url = `https://ggbackend.dy.takin.cc/printer/print-data4?startDate=${startDate}&endDate=${endDate}`;
 
       // 创建隐藏链接进行下载
       const a = document.createElement('a');
@@ -1128,7 +1128,7 @@ function printData(){
       document.body.removeChild(a);
 
 //      // 调用导出API
-//      fetch('http://localhost:8080/printer/print-data', {
+//      fetch('https://ggbackend.dy.takin.cc/printer/print-data', {
 //          method: 'POST',
 //          headers: {
 //              'Content-Type': 'application/json'
@@ -1176,7 +1176,7 @@ function printData(){
       }
 
       // 调用简化导出API
-      const url = `http://localhost:8080/printer/print-data5?startDate=${startDate}&endDate=${endDate}`;
+      const url = `https://ggbackend.dy.takin.cc/printer/print-data5?startDate=${startDate}&endDate=${endDate}`;
 
       // 创建隐藏链接进行下载
       const a = document.createElement('a');
@@ -1304,7 +1304,7 @@ function stopAll() {
         return;
       }
 
-      fetch('http://localhost:8080/smart/stop-all', {
+      fetch('https://ggbackend.dy.takin.cc/smart/stop-all', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

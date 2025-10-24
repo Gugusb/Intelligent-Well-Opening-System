@@ -1,5 +1,5 @@
 // 基础URL - 根据您的实际后端地址修改
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = 'https://ggbackend.dy.takin.cc';
 
 document.addEventListener('DOMContentLoaded', function() {
   const loginBtn = document.getElementById('loginBtn');
@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const loader = document.getElementById('loader');
 
   // 设置默认测试账号
-  usernameInput.value = 'gugusb';
+  usernameInput.value = 'gugu';
   passwordInput.value = '123';
 
   loginBtn.addEventListener('click', function() {
@@ -61,7 +61,6 @@ async function login(username, password) {
 
     if (response.ok && data.code === 200) {
       showMessage('登陆成功，自动跳转中', 'success');
-      // 3秒后跳转到Page1.html
       setTimeout(() => {
         window.location.href = 'AutoHome.html';
       }, 3000);
@@ -84,6 +83,7 @@ function register(){
 }
 
 function showMessage(text, type) {
+
   const messageDiv = document.getElementById('message');
   messageDiv.textContent = text;
   messageDiv.className = 'message ' + type;

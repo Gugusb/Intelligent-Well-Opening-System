@@ -118,7 +118,7 @@ function showNotification(message) {
 
 // 用户登陆验证
 async function loginCheck(){
-  const response = await fetch("http://localhost:8080/user/islogin", {
+  const response = await fetch("https://ggbackend.dy.takin.cc/user/islogin", {
     method: 'GET',
     credentials: 'include'
   });
@@ -130,7 +130,7 @@ async function loginCheck(){
 async function refreshAllParameters() {
   try {
     // 使用正确的URL获取数据
-    const backendData = await fetchData('http://localhost:8080/page2/getlastdata');
+    const backendData = await fetchData('https://ggbackend.dy.takin.cc/page2/getlastdata');
 
     if (!backendData) return; // 获取数据失败时保留原参数
 
@@ -175,18 +175,14 @@ async function refreshAllParameters() {
       document.getElementById(`unit${unitId}StopTime`).textContent = `${unit.stopHr} 时 ${unit.stopMin} 分`;
       document.getElementById(`unit${unitId}StartPressure`).textContent = `${unit.startPressure / 100} MPa`;
       document.getElementById(`unit${unitId}StopPressure`).textContent = `${unit.stopPressure / 100} MPa`;
-      document.getElementById(`unit${unitId}LeftValveTime`).textContent = `${unit.leftValve} S`;
-      document.getElementById(`unit${unitId}RightValveTime`).textContent = `${unit.rightValve} S`;
     }
+    const unit4 = parameters.units[4];
+    document.getElementById(`unit4LeftValveTime`).textContent = `${unit4.leftValve} S`;
+    document.getElementById(`unit4RightValveTime`).textContent = `${unit4.rightValve} S`;
+    const unit5 = parameters.units[5];
+    document.getElementById(`unit5LeftValveTime`).textContent = `${unit5.leftValve} S`;
+    document.getElementById(`unit5RightValveTime`).textContent = `${unit5.rightValve} S`;
 
-    // 更新气举参数显示
-    const gas1 = parameters.gasLifts['1'];
-    document.getElementById('gaslift1LeftValveTime').textContent = `${gas1.leftValve} S`;
-    document.getElementById('gaslift1RightValveTime').textContent = `${gas1.rightValve} S`;
-
-    const gas2 = parameters.gasLifts['2'];
-    document.getElementById('gaslift2RightValveTime').textContent = `${gas2.leftValve} S`;
-    document.getElementById('gaslift2RightValveTime').textContent = `${gas2.rightValve} S`;
 
   } catch (error) {
     console.error('参数更新失败:', error);
@@ -267,7 +263,7 @@ async function updateRequest(dataType, dataValue, dataPlace) {
   // 显示加载指示器
   showLoadingIndicator();
 
-  const url = `http://localhost:8080/opcua/writedata`;
+  const url = `https://ggbackend.dy.takin.cc/opcua/writedata`;
 
   try {
     // 创建请求体

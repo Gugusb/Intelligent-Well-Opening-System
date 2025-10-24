@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="81211035-6f27-4e37-bb81-7c6481cb0247" name="更改" comment="">
+      <change afterPath="$PROJECT_DIR$/AutoCraft.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AutoHome.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AutoHome.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Page1.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Page2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Page3.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Page4.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Page5.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Page_login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/AutoCraft.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/AutoCraft.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/AutoCraft2.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/AutoCraft2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/AutoHome.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/AutoHome.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Page1.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Page1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Page2-btn.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Page2-btn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Page2.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Page2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Page3.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Page3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Page4.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Page4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Page5.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Page5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/Page_login.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/Page_login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/AutoCraft.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/AutoCraft.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/AutoHome.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/AutoHome.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/Page3.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/Page3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/Page4.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/Page4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/Page5.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/Page5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/Page_login.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/Page_login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/page1.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/page2.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/test/usertest.html" beforeDir="false" afterPath="$PROJECT_DIR$/pages/test/usertest.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Gugusb&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Gugusb/Intelligent-Well-Opening-System.git&quot;,
+    &quot;accountId&quot;: &quot;d385e8ce-0e4d-4d6d-aecf-591dd050beca&quot;
+  }
+}</component>
+  <component name="LogFilters">
+    <option name="FILTER_ERRORS" value="false" />
+    <option name="FILTER_WARNINGS" value="false" />
+    <option name="FILTER_INFO" value="true" />
+    <option name="FILTER_DEBUG" value="true" />
+    <option name="CUSTOM_FILTER" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="33RpHZS1vUt7v0IquNF5UcUFV5a" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JavaScript 调试.AutoHome.html.executor&quot;: &quot;Run&quot;,
+    &quot;JavaScript 调试.index.html.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Tomcat 服务器.主页面.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;OUTDEV&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/GuguFiles/JavaPJ/Intelligent Well Opening System&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;C:/Users/1/AppData/Roaming/JetBrains/IntelliJIdea2024.2/node/versions/22.20.0/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;全局库&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Tools\\IntelliJ IDEA 2024.2.4\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\GuguFiles\JavaPJ\Intelligent Well Opening System\pages\test" />
+      <recent name="D:\GuguFiles\JavaPJ\Intelligent Well Opening System" />
+      <recent name="D:\GuguFiles\JavaPJ\Intelligent Well Opening System\pages" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\GuguFiles\JavaPJ\Intelligent Well Opening System\pages" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="主页面" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.111" ALTERNATIVE_JRE_ENABLED="false" show_console_on_std_err="true" show_console_on_std_out="true">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:63343/IWOS/index.html" />
+      <option name="UPDATING_POLICY" value="restart-server" />
+      <deployment>
+        <file path="$PROJECT_DIR$">
+          <settings>
+            <option name="CONTEXT_PATH" value="/IWOS" />
+          </settings>
+        </file>
+      </deployment>
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="d6c24701-f540-430c-aa40-94efcbba4097" />
+        <option name="DEPLOY_TOMCAT_APPS" value="true" />
+        <option name="HTTP_PORT" value="63343" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="55507" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="MakeProject" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" ALTERNATIVE_JRE_ENABLED="false">
+      <deployment />
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="0aa0c25d-7137-49f9-9281-d10880c27450" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="55643" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Profile">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="默认任务">
+      <changelist id="81211035-6f27-4e37-bb81-7c6481cb0247" name="更改" comment="" />
+      <created>1759289651555</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1759289651555</updated>
+      <workItem from="1759289652658" duration="1460000" />
+      <workItem from="1759300677430" duration="3595000" />
+      <workItem from="1759308007298" duration="12025000" />
+      <workItem from="1759626062106" duration="780000" />
+      <workItem from="1759886135610" duration="596000" />
+      <workItem from="1759888153790" duration="1004000" />
+      <workItem from="1759998666403" duration="2804000" />
+      <workItem from="1760324906761" duration="2460000" />
+      <workItem from="1760406187447" duration="5392000" />
+      <workItem from="1760414587618" duration="84000" />
+      <workItem from="1760423509050" duration="6499000" />
+      <workItem from="1760664540843" duration="6000" />
+      <workItem from="1760667941339" duration="5568000" />
+      <workItem from="1760712485160" duration="4332000" />
+      <workItem from="1761009092242" duration="668000" />
+      <workItem from="1761011883441" duration="12201000" />
+      <workItem from="1761146320695" duration="4537000" />
+      <workItem from="1761186347491" duration="1279000" />
+      <workItem from="1761189365698" duration="4824000" />
+      <workItem from="1761202625059" duration="4191000" />
+      <workItem from="1761206916043" duration="8012000" />
+      <workItem from="1761268444312" duration="3754000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Intelligent_Well_Opening_System$.ic" NAME="主页面 覆盖结果" MODIFIED="1761204018550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+  </component>
+</project>

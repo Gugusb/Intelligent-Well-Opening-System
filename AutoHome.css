@@ -1,0 +1,244 @@
+:root {
+  --primary-color: #1a73e8;
+  --primary-light: #e8f0fe;
+  --text-primary: #202124;
+  --text-secondary: #5f6368;
+  --success-color: #34a853;
+  --warning-color: #fbbc04;
+  --error-color: #ea4335;
+  --bg-color: #ffffff;
+  --card-bg: #f8f9fa;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', 'Noto Sans SC', sans-serif;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 30px;
+}
+
+.container {
+  width: 100%;
+  max-width: 600px;
+  background: var(--bg-color);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 40px;
+}
+
+h1 {
+  text-align: center;
+  color: var(--text-primary);
+  margin-bottom: 40px;
+  font-weight: 600;
+  font-size: 32px;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.primary-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 20px 40px;
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.primary-button:hover {
+  background-color: #0d62c9;
+  transform: translateY(-3px);
+}
+
+.primary-button:active {
+  transform: translateY(0);
+}
+
+.round-info {
+  font-size: 20px;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.device-status-container {
+  width: 100%;
+}
+
+.device-status-container h2 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.device-status {
+  width: 100%;
+  height: 280px;
+  overflow-y: auto;
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 20px;
+  border: 2px solid #e0e0e0;
+}
+
+.status-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 2px solid #eeeeee;
+  font-size: 18px;
+}
+
+.status-item:last-child {
+  border-bottom: none;
+}
+
+.device-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.status {
+  font-weight: 600;
+}
+
+.status.normal {
+  color: var(--success-color);
+}
+
+.status.warning {
+  color: var(--warning-color);
+}
+
+.status.error {
+  color: var(--error-color);
+}
+
+.test-result {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 20px;
+}
+
+.result-label {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.result-value {
+  font-weight: 600;
+}
+
+.result-value.testing {
+  color: var(--primary-color);
+}
+
+.result-value.success {
+  color: var(--success-color);
+}
+
+.result-value.failed {
+  color: var(--error-color);
+}
+
+.control-buttons {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.control-button {
+  flex: 1;
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+  border: none;
+  border-radius: 12px;
+  padding: 18px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: background-color 0.2s;
+}
+
+.control-button:hover {
+  background-color: #d2e3fc;
+}
+
+.button-icon {
+  font-size: 24px;
+}
+
+/* 滚动条样式 */
+.device-status::-webkit-scrollbar {
+  width: 10px;
+}
+
+.device-status::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.device-status::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 10px;
+}
+
+.device-status::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.status.normal {
+  color: green;
+}
+.status.abnormal {
+  color: red;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 25px;
+  }
+
+  .control-buttons {
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+
+  .primary-button {
+    padding: 16px 32px;
+    font-size: 20px;
+  }
+}

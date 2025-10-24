@@ -117,7 +117,7 @@ async function updateRequest(dataType, dataValue, dataPlace) {
   // 显示加载指示器
   showLoadingIndicator();
 
-  const url = `http://localhost:8080/opcua/writedata`;
+  const url = `https://ggbackend.dy.takin.cc/opcua/writedata`;
 
   try {
     // 创建请求体
@@ -174,7 +174,7 @@ async function updateRequest(dataType, dataValue, dataPlace) {
 
 // 用户登陆验证
 async function loginCheck(){
-  const response = await fetch("http://localhost:8080/user/islogin", {
+  const response = await fetch("https://ggbackend.dy.takin.cc/user/islogin", {
     method: 'GET',
     credentials: 'include'
   });
@@ -275,7 +275,7 @@ const AppState = {
    */
   async fetchData() {
     try {
-      const response = await fetch('http://localhost:8080/page3/getlastdata', {
+      const response = await fetch('https://ggbackend.dy.takin.cc/page3/getlastdata', {
         method: 'GET',
         credentials: 'include'
       });
@@ -419,21 +419,12 @@ const AppState = {
     document.getElementById('set-resume-45').addEventListener('click', () =>
       this.showSettingDialog("4#5#后端恢复压力", 'resume45'));
 
-    document.getElementById('set-alarm-gaslift1').addEventListener('click', () =>
-      this.showSettingDialog("气举1#报警压力", 'alarmGaslift1'));
-
-    document.getElementById('set-resume-gaslift1').addEventListener('click', () =>
-      this.showSettingDialog("气举1#恢复压力", 'resumeGaslift1'));
-
-    document.getElementById('set-alarm-gaslift2').addEventListener('click', () =>
-      this.showSettingDialog("气举2#报警压力", 'alarmGaslift2'));
-
     // 机组控制按钮事件
     for (let i = 1; i <= 5; i++) {
-      document.getElementById(`unit${i}-start`).addEventListener('click', () =>
+      document.getElementById("unit" + i + "-start").addEventListener('click', () =>
         this.confirmUnitAction(i, "on", "开启"));
 
-      document.getElementById(`unit${i}-stop`).addEventListener('click', () =>
+      document.getElementById("unit" + i + "-stop").addEventListener('click', () =>
         this.confirmUnitAction(i, "off", "关闭"));
     }
 
@@ -497,9 +488,6 @@ const AppState = {
     document.getElementById('backendRecoveryPressure123').textContent = this.pressureParams.resume123 / 100;
     document.getElementById('backendAlarmPressure45').textContent = this.pressureParams.alarm45 / 100;
     document.getElementById('backendRecoveryPressure45').textContent = this.pressureParams.resume45 / 100;
-    document.getElementById('gaslift1BackendAlarmPressure').textContent = this.pressureParams.alarmGaslift1;
-    document.getElementById('gaslift1BackendRecoveryPressure').textContent = this.pressureParams.resumeGaslift1;
-    document.getElementById('gaslift2BackendAlarmPressure').textContent = this.pressureParams.alarmGaslift2;
   },
 
   // 双重确认函数

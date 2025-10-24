@@ -29,9 +29,9 @@
       <div class="data-item">
         <span>右电气箱状态：</span>
         <span>
-                        <span class="status-indicator running" id="rightElecStatus"></span>
-                        <span class="data-value"  id="rightElecText">运行正常</span>
-                    </span>
+            <span class="status-indicator running" id="rightElecStatus"></span>
+            <span class="data-value"  id="rightElecText">运行正常</span>
+        </span>
       </div>
     </div>
 
@@ -118,7 +118,7 @@
   <div class="panel-center">
     <div class="monitor-block">
       <div class="model-placeholder">
-        <img src="../img/equipment_3d_diagram_2.png" alt="设备3D图" class="model-image">
+        <img src="img/equipment_3d_diagram_2.png" alt="设备3D图" class="model-image">
       </div>
     </div>
 
@@ -134,13 +134,13 @@
           </div>
           <div class="flow-item">
             <span>1#2#3#总累计流量(m³)：</span>
-            <span class="flow-value" if="totalAccumulatedFlow123">0<span class="unit">m³</span></span>
+            <span class="flow-value" id="totalAccumulatedFlow123">0<span class="unit">m³</span></span>
           </div>
         </div>
         <div class="flow-group">
           <div class="flow-item">
             <span>4#5#总瞬时流量(L/S)：</span>
-            <span class="flow-value" if="totalInstantFlow45">0<span class="unit">L/S</span></span>
+            <span class="flow-value" id="totalInstantFlow45">0<span class="unit">L/S</span></span>
           </div>
           <div class="flow-item">
             <span>4#5#总累计流量(m³)：</span>
@@ -215,24 +215,12 @@
     <div class="monitor-block">
       <h2>流量计监控</h2>
       <div class="data-item">
-        <span>瞬时流量：</span>
-        <span class="data-value"><span id="instantFlow">0</span><span class="unit">m³/h</span></span>
+        <span>瞬时气体流量：</span>
+        <span class="data-value"><span id="instantFlow">0</span><span class="unit">m³/d</span></span>
       </div>
       <div class="data-item">
-        <span>累计流量：</span>
-        <span class="data-value"><span id="totalFlow">0</span><span class="unit">m³</span></span>
-      </div>
-      <div class="data-item">
-        <span>介质温度：</span>
-        <span class="data-value"><span id="mediumTemp">0</span><span class="unit">°C</span></span>
-      </div>
-      <div class="data-item">
-        <span>静压值：</span>
-        <span class="data-value"><span id="staticPressure">0</span><span class="unit">MPa</span></span>
-      </div>
-      <div class="data-item">
-        <span>压差值：</span>
-        <span class="data-value"><span id="pressureDiff">0</span><span class="unit">KPa</span></span>
+        <span>瞬时液体流量：</span>
+        <span class="data-value"><span id="mediumTemp">0</span><span class="unit">m³/d</span></span>
       </div>
     </div>
   </div>

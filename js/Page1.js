@@ -63,7 +63,7 @@ function toPage4() {
 
 // 用户登陆验证
 async function loginCheck(){
-  const response = await fetch("http://localhost:8080/user/islogin", {
+  const response = await fetch("https://ggbackend.dy.takin.cc/user/islogin", {
     method: 'GET',
     credentials: 'include'
   });
@@ -123,16 +123,16 @@ function updateFlowData(data) {
 
   const flowElements = [
     { selector: "totalInstantFlow123", value: data.totalInstantFlow123 / 10 },
-    { selector: "data.totalAccumulatedFlow123", value: data.totalAccumulatedFlow123  * 100},
-    { selector: "data.totalInstantFlow45", value: data.totalInstantFlow45  / 10},
-    { selector: "data.totalAccumulatedFlow45", value: data.totalAccumulatedFlow45 * 100 },
+    { selector: "totalAccumulatedFlow123", value: data.totalAccumulatedFlow123  * 100},
+    { selector: "totalInstantFlow45", value: data.totalInstantFlow45  / 10},
+    { selector: "totalAccumulatedFlow45", value: data.totalAccumulatedFlow45 * 100 },
     { selector: "gasliftInstantFlow", value: data.gasliftInstantFlow / 100 },
     { selector: "gasliftAccumulatedFlow", value: data.gasliftAccumulatedFlow / 100 }
   ];
 
   flowElements.forEach(item => {
     if (item) {
-      //console.log(item.selector, item.value)
+      // console.log(item.selector, item.value)
       updateElement(item.selector, item.value)
     }
   });
@@ -151,8 +151,8 @@ function updateDeviceStatusDisplay(data) {
   }
 
   // 更新电气箱状态
-  updateElecBoxDisplay("leftElecStatus", "leftElecText", data.leftElecBoxStatus);
-  updateElecBoxDisplay("rightElecStatus", "rightElecText", data.rightElecBoxStatus);
+  updateElecBoxDisplay("leftElecStatus", "leftElecText", 0);
+  updateElecBoxDisplay("rightElecStatus", "rightElecText", 0);
 
   console.log(data)
 
@@ -233,7 +233,7 @@ function updateTime() {
 
 // 从后端获取数据
 async function fetchData() {
-  const url = `http://localhost:8080/page1/getlastdata`;
+  const url = `https://ggbackend.dy.takin.cc/page1/getlastdata`;
 
   try {
     const response = await fetch(url, {

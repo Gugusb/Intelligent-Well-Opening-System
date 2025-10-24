@@ -117,7 +117,7 @@ async function updateRequest(dataType, dataValue, dataPlace) {
   // 显示加载指示器
   showLoadingIndicator();
 
-  const url = `http://localhost:8080/opcua/writedata`;
+  const url = `https://ggbackend.dy.takin.cc/opcua/writedata`;
 
   try {
     // 创建请求体
@@ -172,7 +172,7 @@ async function updateRequest(dataType, dataValue, dataPlace) {
 
 // 用户登陆验证
 async function loginCheck(){
-  const response = await fetch("http://localhost:8080/user/islogin", {
+  const response = await fetch("https://ggbackend.dy.takin.cc/user/islogin", {
     method: 'GET',
     credentials: 'include'
   });
@@ -279,7 +279,7 @@ const DosingParamsState = {
    */
   async fetchData() {
     try {
-      const response = await fetch('http://localhost:8080/page5/getlastdata', {
+      const response = await fetch('https://ggbackend.dy.takin.cc/page5/getlastdata', {
         method: 'GET',
         credentials: 'include'
       });

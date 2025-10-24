@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       // 调用API
-      fetch('http://localhost:8080/smart/system-start-process', {
+      fetch('https://ggbackend.dy.takin.cc/smart/system-start-process', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.getElementById("testButton").addEventListener("click", function () {
-  fetch("http://localhost:8080/smart/system-start-check", {
+  fetch("https://ggbackend.dy.takin.cc/smart/system-start-check", {
     method: "POST",
     credentials: "include"
   })
@@ -216,23 +216,14 @@ document.getElementById("testButton").addEventListener("click", function () {
 });
 
 async function loginCheck(){
-  const response = await fetch("http://localhost:8080/user/islogin", {
+  const response = await fetch("https://ggbackend.dy.takin.cc/user/islogin", {
     method: 'GET',
     credentials: 'include'
   });
-  if (!response.ok) {
+  const result = await response.json();
+  if (!(result.code == 200)) {
     window.location.href = 'Page_login.html';
   }
-}
-
-function toPage1() {
-  // 跳转到同目录下的Page2.html页面
-  window.location.href = 'Page1.html';
-}
-
-function toPageAutoCraft() {
-  // 跳转到同目录下的Page2.html页面
-  window.location.href = 'AutoCraft.html';
 }
 
 // 创建输入组的辅助函数
@@ -261,3 +252,15 @@ function createInputGroup(id, label) {
 
   return group;
 }
+
+
+function toPage1() {
+  // 跳转到同目录下的Page2.html页面
+  window.location.href = 'Page1.html';
+}
+
+function toPageAutoCraft() {
+  // 跳转到同目录下的Page2.html页面
+  window.location.href = 'AutoCraft.html';
+}
+

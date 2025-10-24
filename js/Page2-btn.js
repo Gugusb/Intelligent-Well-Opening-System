@@ -27,7 +27,7 @@ function generateRequestBody(dataType, dataValue, dataPlace) {
 }
 
 async function updateRequest(dataType, dataValue, dataPlace) {
-  const url = `http://localhost:8080/opcua/writedata`;
+  const url = `https://ggbackend.dy.takin.cc/opcua/writedata`;
 
   try {
     // 创建请求体

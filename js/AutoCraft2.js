@@ -118,7 +118,7 @@ function editCraft() {
       }
 
       // 调用API
-      fetch('http://localhost:8080/smart/edit-craft', {
+      fetch('https://ggbackend.dy.takin.cc/smart/edit-craft', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json'
